@@ -1,0 +1,49 @@
+# Données sensibles / volumineuses
+data/raw/*
+data/processed/*
+*.parquet
+*.csv
+*.txt
+*.xlsx
+
+# Garder les dossiers vides + samples
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/samples/
+data/samples/*.parquet
+
+# Credentials
+.env
+*_credentials.json
+service_account_key.json
+config/*credentials*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Power BI (si vous versionnez le .pbix, attention à la taille)
+*.pbix
