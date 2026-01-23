@@ -51,9 +51,10 @@ cp .env.example .env
 ## 🙋 Auteur
 
 **Antoine Bineau**   
+[LinkedIn](https://www.linkedin.com/in/antoine-bineau/)
+
 Projet personnel - Montée en compétence Data Analysis / Analytics Engineering
 📅 Novembre 2025
-[LinkedIn](https://www.linkedin.com/in/antoine-bineau/)
 
 ---
 
