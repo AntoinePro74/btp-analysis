@@ -16,12 +16,14 @@ Construire une analyse data complète du secteur BTP français (source SIRENE) a
 - **Orchestration** : Scripts Python automatisés
 
 ## 🗂️ Structure du projet
+```bash
 ├── data/ # Données (exclu Git)
 ├── notebooks/ # Notebooks exploratoires
 ├── scripts/ # Scripts production
 ├── sql/ # Requêtes BigQuery
 ├── config/ # Configurations
 └── docs/ # Documentation
+```
 
 
 ## 🚀 Installation
@@ -43,3 +45,24 @@ cp .env.example .env
 - ~40 codes APE BTP traités
 - Corrélation 0,60 : Densité BTP × Urbanisation
 - Dashboard interactif : segmentation multi-critères
+
+---
+
+## 🙋 Auteur
+
+**Antoine Bineau**   
+Projet personnel - Montée en compétence Data Analysis / Analytics Engineering
+📅 Novembre 2025
+[LinkedIn](https://www.linkedin.com/in/antoine-bineau/)
+
+---
+
+## 📝 License
+
+MIT License
+
+---
+
+## 🤝 Contributions
+
+Vos contributions, idées et suggestions de fonctionnalités sont les bienvenues ! Ouvrez un ticket.
