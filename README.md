@@ -36,4 +36,10 @@ pip install -r requirements.txt
 # Configurer les credentials
 cp .env.example .env
 # Éditer .env avec vos clés API
+```
 
+## 📈 Résultats clés
+- 96 départements analysés (métropole + DROM)
+- ~40 codes APE BTP traités
+- Corrélation 0,60 : Densité BTP × Urbanisation
+- Dashboard interactif : segmentation multi-critères
