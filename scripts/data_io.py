@@ -3,7 +3,13 @@ Module de gestion des entrées/sorties de données
 """
 import pandas as pd
 import os
+import json
+from datetime import datetime
 
+
+# ========================================
+# FONCTIONS DONNÉES BRUTES (raw)
+# ========================================
 
 def load_raw_data(code_ape, data_dir="data/raw"):
     """
@@ -25,6 +31,109 @@ def load_raw_data(code_ape, data_dir="data/raw"):
     print(f"📂 Chargé : {filepath} ({len(df)} lignes, {len(df.columns)} colonnes)")
     return df
 
+
+def save_raw_data(entreprises, code_ape, output_dir="data/raw"):
+    """
+    Sauvegarde les données brutes finales + métadonnées
+    
+    Args:
+        entreprises (list): Liste des établissements (dict)
+        code_ape (str): Code APE
+        output_dir (str): Répertoire de sortie
+    
+    Returns:
+        str: Chemin du fichier créé
+    """
+    os.makedirs(output_dir, exist_ok=True)
+    df = pd.json_normalize(entreprises)
+    filepath = f"{output_dir}/raw_entreprises_{code_ape}.parquet"
+    df.to_parquet(filepath, engine="pyarrow", index=False)
+    
+    # Sauvegarder métadonnées comme "completed"
+    save_metadata(code_ape, "completed", len(entreprises), output_dir)
+    
+    # Supprimer le checkpoint si existe
+    checkpoint_path = f"{output_dir}/checkpoint_{code_ape}.parquet"
+    if os.path.exists(checkpoint_path):
+        os.remove(checkpoint_path)
+    
+    print(f"💾 {code_ape} : Données sauvegardées - {filepath}")
+    return filepath
+
+
+def save_checkpoint(entreprises, code_ape, output_dir="data/raw"):
+    """
+    Sauvegarde un checkpoint (extraction partielle)
+    
+    Args:
+        entreprises (list): Liste des établissements (dict)
+        code_ape (str): Code APE
+        output_dir (str): Répertoire de sortie
+    """
+    os.makedirs(output_dir, exist_ok=True)
+    df = pd.json_normalize(entreprises)
+    filepath = f"{output_dir}/checkpoint_{code_ape}.parquet"
+    df.to_parquet(filepath, engine="pyarrow", index=False)
+    print(f"💾 Checkpoint : {len(entreprises)} établissements sauvegardés")
+
+
+# ========================================
+# FONCTIONS MÉTADONNÉES
+# ========================================
+
+def get_metadata_path(code_ape, output_dir="data/raw"):
+    """Retourne le chemin du fichier de métadonnées"""
+    return f"{output_dir}/.metadata_{code_ape}.json"
+
+
+def save_metadata(code_ape, status, nb_etablissements, output_dir="data/raw"):
+    """
+    Sauvegarde les métadonnées d'extraction
+    
+    Args:
+        code_ape (str): Code APE
+        status (str): 'completed' ou 'partial'
+        nb_etablissements (int): Nombre d'établissements extraits
+        output_dir (str): Répertoire de sortie
+    """
+    metadata = {
+        "code_ape": code_ape,
+        "extraction_date": datetime.now().isoformat(),
+        "status": status,
+        "nb_etablissements": nb_etablissements
+    }
+    
+    filepath = get_metadata_path(code_ape, output_dir)
+    with open(filepath, 'w') as f:
+        json.dump(metadata, f, indent=2)
+
+
+def load_metadata(code_ape, output_dir="data/raw"):
+    """
+    Charge les métadonnées d'extraction
+    
+    Args:
+        code_ape (str): Code APE
+        output_dir (str): Répertoire de sortie
+    
+    Returns:
+        dict: Métadonnées ou None si absent
+    """
+    filepath = get_metadata_path(code_ape, output_dir)
+    
+    if not os.path.exists(filepath):
+        return None
+    
+    try:
+        with open(filepath, 'r') as f:
+            return json.load(f)
+    except:
+        return None
+
+
+# ========================================
+# FONCTIONS DONNÉES TRAITÉES (processed/final)
+# ========================================
 
 def save_split_data(df_siret, df_siren, df_full, code_ape, output_dir="data/processed"):
     """
@@ -104,7 +213,15 @@ if __name__ == "__main__":
     df_raw = load_raw_data(CODE_APE_TEST)
     print(f"   ✅ {len(df_raw)} lignes chargées\n")
     
-    # Test 2: Chargement données traitées
+    # Test 2: Métadonnées
+    print("📄 Test métadonnées...")
+    metadata = load_metadata(CODE_APE_TEST)
+    if metadata:
+        print(f"   ✅ Métadonnées chargées : {metadata['status']}, {metadata['nb_etablissements']} étab., {metadata['extraction_date']}\n")
+    else:
+        print(f"   ⚠️ Pas de métadonnées trouvées\n")
+    
+    # Test 3: Chargement données traitées
     print("📂 Test chargement données traitées...")
     try:
         df_siret = load_processed_data(CODE_APE_TEST, "siret")
