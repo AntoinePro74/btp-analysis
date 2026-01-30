@@ -1,0 +1,6 @@
+anciennete_id,libelle,borne_min_annees,borne_max_annees,ordre
+moins_2_ans,< 2 ans,0,2,1
+2_5_ans,2-5 ans,2,5,2
+5_10_ans,5-10 ans,5,10,3
+10_20_ans,10-20 ans,10,20,4
+plus_20_ans,> 20 ans,20,999,5

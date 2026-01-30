@@ -4,9 +4,6 @@ data/processed/*
 data/final/*
 logs/*
 *.parquet
-*.csv
-*.txt
-*.xlsx
 *.log
 
 # Garder les dossiers vides + samples
@@ -56,3 +53,6 @@ Thumbs.db
 
 # Power BI
 *.pbix
+
+# BigQuery
+bquxjob_*.csv
