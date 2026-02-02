@@ -1,40 +1,40 @@
-categorie_juridique_ul_niv2,Libellé
-0,Organisme de placement collectif en valeurs mobilières sans personnalité morale
-10,Entrepreneur individuel
-21,Indivision
-22,Société créée de fait
-23,Société en participation
-24,Fiducie
-27,Paroisse hors zone concordataire
-28,Assujetti unique à la TVA
-29,Autre groupement de droit privé non doté de la personnalité morale
-31,"Personne morale de droit étranger, immatriculée au RCS (registre du commerce et des sociétés)"
-32,"Personne morale de droit étranger, non immatriculée au RCS"
-41,Etablissement public ou régie à caractère industriel ou commercial
-51,Société coopérative commerciale particulière
-52,Société en nom collectif
-53,Société en commandite
-54,Société à responsabilité limitée (SARL)
-55,Société anonyme à conseil d'administration
-56,Société anonyme à directoire
-57,Société par actions simplifiée
-58,Société européenne
-61,Caisse d'épargne et de prévoyance
-62,Groupement d'intérêt économique
-63,Société coopérative agricole
-64,Société d'assurance mutuelle
-65,Société civile
-69,Autre personne morale de droit privé inscrite au registre du commerce et des sociétés
-71,Administration de l'état
-72,Collectivité territoriale
-73,Etablissement public administratif
-74,Autre personne morale de droit public administratif
-81,Organisme gérant un régime de protection sociale à adhésion obligatoire
-82,Organisme mutualiste
-83,Comité d'entreprise
-84,Organisme professionnel
-85,Organisme de retraite à adhésion non obligatoire
-91,Syndicat de propriétaires
-92,Association loi 1901 ou assimilé
-93,Fondation
-99,Autre personne morale de droit privé
+categorie_juridique_ul_niv2,famille_juridique,Libelle
+0,Organisme sans personnalité morale,Organisme de placement collectif en valeurs mobilières sans personnalité morale
+10,Entrepreneur individuel,Entrepreneur individuel
+21,Groupement sans personnalité morale,Indivision
+22,Groupement sans personnalité morale,Société créée de fait
+23,Groupement sans personnalité morale,Société en participation
+24,Groupement sans personnalité morale,Fiducie
+27,Groupement sans personnalité morale,Paroisse hors zone concordataire
+28,Groupement sans personnalité morale,Assujetti unique à la TVA
+29,Groupement sans personnalité morale,Autre groupement de droit privé non doté de la personnalité morale
+31,Personne morale de droit étranger,"Personne morale de droit étranger, immatriculée au RCS (registre du commerce et des sociétés)"
+32,Personne morale de droit étranger,"Personne morale de droit étranger, non immatriculée au RCS"
+41,Établissement public,Etablissement public ou régie à caractère industriel ou commercial
+51,Société commerciale,Société coopérative commerciale particulière
+52,Société commerciale,Société en nom collectif
+53,Société commerciale,Société en commandite
+54,Société commerciale,Société à responsabilité limitée (SARL)
+55,Société commerciale,Société anonyme à conseil d'administration
+56,Société commerciale,Société anonyme à directoire
+57,Société commerciale,Société par actions simplifiée
+58,Société commerciale,Société européenne
+61,Société commerciale,Caisse d'épargne et de prévoyance
+62,Société commerciale,Groupement d'intérêt économique
+63,Société commerciale,Société coopérative agricole
+64,Société commerciale,Société d'assurance mutuelle
+65,Société commerciale,Société civile
+69,Société commerciale,Autre personne morale de droit privé inscrite au registre du commerce et des sociétés
+71,Administration publique,Administration de l'état
+72,Administration publique,Collectivité territoriale
+73,Administration publique,Etablissement public administratif
+74,Administration publique,Autre personne morale de droit public administratif
+81,Organisme social,Organisme gérant un régime de protection sociale à adhésion obligatoire
+82,Organisme social,Organisme mutualiste
+83,Organisme social,Comité d'entreprise
+84,Organisme social,Organisme professionnel
+85,Organisme social,Organisme de retraite à adhésion non obligatoire
+91,Association et fondation,Syndicat de propriétaires
+92,Association et fondation,Association loi 1901 ou assimilé
+93,Association et fondation,Fondation
+99,Association et fondation,Autre personne morale de droit privé

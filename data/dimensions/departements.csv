@@ -1,102 +1,102 @@
-dep,dep_name,prefecture,region,km2,population(2022)
-01,Ain,Bourg-en-Bresse,Auvergne-Rhône-Alpes,5762.4,671289
-02,Aisne,Laon,Hauts-de-France,7361.7,525558
-03,Allier,Moulins,Auvergne-Rhône-Alpes,7340.1,334715
-04,Alpes-de-Haute-Provence,Digne-les-Bains,Provence-Alpes-Côte d'Azur,6925.2,167179
-05,Hautes-Alpes,Gap,Provence-Alpes-Côte d'Azur,5548.7,141677
-06,Alpes-Maritimes,Nice,Provence-Alpes-Côte d'Azur,4298.6,1114579
-07,Ardèche,Privas,Auvergne-Rhône-Alpes,5528.6,333229
-08,Ardennes,Charleville-Mézières,Grand Est,5229.4,267204
-09,Ariège,Foix,Occitanie,4889.9,155339
-10,Aube,Troyes,Grand Est,6004.2,311076
-11,Aude,Carcassonne,Occitanie,6139,377773
-12,Aveyron,Rodez,Occitanie,8735.1,279736
-13,Bouches-du-Rhône,Marseille,Provence-Alpes-Côte d'Azur,5087.5,2069811
-14,Calvados,Caen,Normandie,5534.5,704605
-15,Cantal,Aurillac,Auvergne-Rhône-Alpes,5726,144399
-16,Charente,Angoulême,Nouvelle-Aquitaine,5956,351603
-17,Charente-Maritime,La Rochelle,Nouvelle-Aquitaine,6863.8,668160
-18,Cher,Bourges,Centre-Val de Loire,7235,299496
-19,Corrèze,Tulle,Nouvelle-Aquitaine,5856.8,240120
-2A,Corse-du-Sud,Ajaccio,Corse,4014.2,166045
-2B,Haute-Corse,Bastia,Corse,4665.6,185231
-21,Côte-d'Or,Dijon,Bourgogne-Franche-Comté,8763.2,537577
-22,Côtes-d'Armor,Saint-Brieuc,Bretagne,6877.6,609598
-23,Creuse,Guéret,Nouvelle-Aquitaine,5565.4,115529
-24,Dordogne,Périgueux,Nouvelle-Aquitaine,9060,416325
-25,Doubs,Besançon,Bourgogne-Franche-Comté,5232.6,548662
-26,Drôme,Valence,Auvergne-Rhône-Alpes,6530,521432
-27,Eure,Évreux,Normandie,6039.9,601305
-28,Eure-et-Loir,Chartres,Centre-Val de Loire,5880,432950
-29,Finistère,Quimper,Bretagne,6733,927912
-30,Gard,Nîmes,Occitanie,5852.8,764010
-31,Haute-Garonne,Toulouse,Occitanie,6309.3,1456261
-32,Gers,Auch,Occitanie,6256.8,192649
-33,Gironde,Bordeaux,Nouvelle-Aquitaine,9975.6,1674980
-34,Hérault,Montpellier,Occitanie,6101,1217331
-35,Ille-et-Vilaine,Rennes,Bretagne,6774.7,1109232
-36,Indre,Châteauroux,Centre-Val de Loire,6790.6,216809
-37,Indre-et-Loire,Tours,Centre-Val de Loire,6126.7,616326
-38,Isère,Grenoble,Auvergne-Rhône-Alpes,7431.5,1291380
-39,Jura,Lons-le-Saunier,Bourgogne-Franche-Comté,4999.2,258405
-40,Landes,Mont-de-Marsan,Nouvelle-Aquitaine,9242.6,428427
-41,Loir-et-Cher,Blois,Centre-Val de Loire,6343.4,328953
-42,Loire,Saint-Étienne,Auvergne-Rhône-Alpes,4780.6,772041
-43,Haute-Loire,Le Puy-en-Velay,Auvergne-Rhône-Alpes,4977.1,228161
-44,Loire-Atlantique,Nantes,Pays de la Loire,6874.4,1473156
-45,Loiret,Orléans,Centre-Val de Loire,6775.2,687063
-46,Lot,Cahors,Occitanie,5216.5,175620
-47,Lot-et-Garonne,Agen,Nouvelle-Aquitaine,5360.9,332226
-48,Lozère,Mende,Occitanie,5166.9,76503
-49,Maine-et-Loire,Angers,Pays de la Loire,7106.6,828151
-50,Manche,Saint-Lô,Normandie,5951.5,496815
-51,Marne,Châlons-en-Champagne,Grand Est,8169.1,564107
-52,Haute-Marne,Chaumont,Grand Est,6210.6,169865
-53,Mayenne,Laval,Pays de la Loire,5175.2,305437
-54,Meurthe-et-Moselle,Nancy,Grand Est,5245.9,732898
-55,Meuse,Bar-le-Duc,Grand Est,6211.4,180745
-56,Morbihan,Vannes,Bretagne,6822.6,776103
-57,Moselle,Metz,Grand Est,6216.3,1050721
-58,Nièvre,Nevers,Bourgogne-Franche-Comté,6816.7,202299
-59,Nord,Lille,Hauts-de-France,5742.8,2616909
-60,Oise,Beauvais,Hauts-de-France,5860.2,830725
-61,Orne,Alençon,Normandie,6103.4,276144
-62,Pas-de-Calais,Arras,Hauts-de-France,6671.4,1460184
-63,Puy-de-Dôme,Clermont-Ferrand,Auvergne-Rhône-Alpes,7969.7,664385
-64,Pyrénées-Atlantiques,Pau,Nouvelle-Aquitaine,7644.8,699473
-65,Hautes-Pyrénées,Tarbes,Occitanie,4464,231453
-66,Pyrénées-Orientales,Perpignan,Occitanie,4116,492964
-67,Bas-Rhin,Strasbourg,Grand Est,4755,1156963
-68,Haut-Rhin,Colmar,Grand Est,3525.2,767800
-69,Rhône,Lyon,Auvergne-Rhône-Alpes,3249.1,1907982
-70,Haute-Saône,Vesoul,Bourgogne-Franche-Comté,5360.1,233920
-71,Saône-et-Loire,Mâcon,Bourgogne-Franche-Comté,8574.7,549136
-72,Sarthe,Le Mans,Pays de la Loire,6206,566129
-73,Savoie,Chambéry,Auvergne-Rhône-Alpes,6028.3,445288
-74,Haute-Savoie,Annecy,Auvergne-Rhône-Alpes,4387.8,849583
-75,Paris,Paris,Île-de-France,105.4,2113705
-76,Seine-Maritime,Rouen,Normandie,6277.6,1260205
-77,Seine-et-Marne,Melun,Île-de-France,5915.3,1452399
-78,Yvelines,Versailles,Île-de-France,2284.4,1470778
-79,Deux-Sèvres,Niort,Nouvelle-Aquitaine,5999.4,375415
-80,Somme,Amiens,Hauts-de-France,6170.1,565540
-81,Tarn,Albi,Occitanie,5757.9,396168
-82,Tarn-et-Garonne,Montauban,Occitanie,3718.3,264924
-83,Var,Toulon,Provence-Alpes-Côte d'Azur,5972.5,1108364
-84,Vaucluse,Avignon,Provence-Alpes-Côte d'Azur,3567.3,568702
-85,Vendée,La Roche-sur-Yon,Pays de la Loire,6719.6,706343
-86,Vienne,Poitiers,Nouvelle-Aquitaine,6990.4,438688
-87,Haute-Vienne,Limoges,Nouvelle-Aquitaine,5520.1,372438
-88,Vosges,Épinal,Grand Est,5873.8,358700
-89,Yonne,Auxerre,Bourgogne-Franche-Comté,7427.4,333896
-90,Territoire de Belfort,Belfort,Bourgogne-Franche-Comté,609.4,140082
-91,Essonne,Évry-Courcouronnes,Île-de-France,1804.4,1324546
-92,Hauts-de-Seine,Nanterre,Île-de-France,175.6,1647435
-93,Seine-Saint-Denis,Bobigny,Île-de-France,236.2,1681725
-94,Val-de-Marne,Créteil,Île-de-France,245,1419531
-95,Val-d'Oise,Pontoise,Île-de-France,1245.9,1270845
-971,Guadeloupe,Basse-Terre,Guadeloupe,1628.4,383569
-972,Martinique,Fort-de-France,Martinique,1128,361019
-973,Guyane,Cayenne,Guyane,83533.9,288382
-974,La Réunion,Saint-Denis,La Réunion,2503.7,881348
-976,Mayotte,Mamoudzou,Mayotte,376,256518
+dep,dep_name,prefecture,region,km2,population_2022,profil_territorial,profil_territorial_ordre
+01,Ain,Bourg-en-Bresse,Auvergne-Rhône-Alpes,5762.4,671289,Péri-urbain,2
+02,Aisne,Laon,Hauts-de-France,7361.7,525558,Rural,1
+03,Allier,Moulins,Auvergne-Rhône-Alpes,7340.1,334715,Rural,1
+04,Alpes-de-Haute-Provence,Digne-les-Bains,Provence-Alpes-Côte d'Azur,6925.2,167179,Urbain,3
+05,Hautes-Alpes,Gap,Provence-Alpes-Côte d'Azur,5548.7,141677,Urbain,3
+06,Alpes-Maritimes,Nice,Provence-Alpes-Côte d'Azur,4298.6,1114579,Très urbain,4
+07,Ardèche,Privas,Auvergne-Rhône-Alpes,5528.6,333229,Péri-urbain,2
+08,Ardennes,Charleville-Mézières,Grand Est,5229.4,267204,Rural,1
+09,Ariège,Foix,Occitanie,4889.9,155339,Rural,1
+10,Aube,Troyes,Grand Est,6004.2,311076,Rural,1
+11,Aude,Carcassonne,Occitanie,6139,377773,Rural,1
+12,Aveyron,Rodez,Occitanie,8735.1,279736,Péri-urbain,2
+13,Bouches-du-Rhône,Marseille,Provence-Alpes-Côte d'Azur,5087.5,2069811,Urbain,3
+14,Calvados,Caen,Normandie,5534.5,704605,Péri-urbain,2
+15,Cantal,Aurillac,Auvergne-Rhône-Alpes,5726,144399,Rural,1
+16,Charente,Angoulême,Nouvelle-Aquitaine,5956,351603,Rural,1
+17,Charente-Maritime,La Rochelle,Nouvelle-Aquitaine,6863.8,668160,Rural,1
+18,Cher,Bourges,Centre-Val de Loire,7235,299496,Rural,1
+19,Corrèze,Tulle,Nouvelle-Aquitaine,5856.8,240120,Rural,1
+2A,Corse-du-Sud,Ajaccio,Corse,4014.2,166045,Urbain,3
+2B,Haute-Corse,Bastia,Corse,4665.6,185231,Urbain,3
+21,Côte-d'Or,Dijon,Bourgogne-Franche-Comté,8763.2,537577,Péri-urbain,2
+22,Côtes-d'Armor,Saint-Brieuc,Bretagne,6877.6,609598,Rural,1
+23,Creuse,Guéret,Nouvelle-Aquitaine,5565.4,115529,Rural,1
+24,Dordogne,Périgueux,Nouvelle-Aquitaine,9060,416325,Rural,1
+25,Doubs,Besançon,Bourgogne-Franche-Comté,5232.6,548662,Péri-urbain,2
+26,Drôme,Valence,Auvergne-Rhône-Alpes,6530,521432,Péri-urbain,2
+27,Eure,Évreux,Normandie,6039.9,601305,Rural,1
+28,Eure-et-Loir,Chartres,Centre-Val de Loire,5880,432950,Rural,1
+29,Finistère,Quimper,Bretagne,6733,927912,Rural,1
+30,Gard,Nîmes,Occitanie,5852.8,764010,Péri-urbain,2
+31,Haute-Garonne,Toulouse,Occitanie,6309.3,1456261,Péri-urbain,2
+32,Gers,Auch,Occitanie,6256.8,192649,Rural,1
+33,Gironde,Bordeaux,Nouvelle-Aquitaine,9975.6,1674980,Péri-urbain,2
+34,Hérault,Montpellier,Occitanie,6101,1217331,Péri-urbain,2
+35,Ille-et-Vilaine,Rennes,Bretagne,6774.7,1109232,Péri-urbain,2
+36,Indre,Châteauroux,Centre-Val de Loire,6790.6,216809,Rural,1
+37,Indre-et-Loire,Tours,Centre-Val de Loire,6126.7,616326,Rural,1
+38,Isère,Grenoble,Auvergne-Rhône-Alpes,7431.5,1291380,Péri-urbain,2
+39,Jura,Lons-le-Saunier,Bourgogne-Franche-Comté,4999.2,258405,Péri-urbain,2
+40,Landes,Mont-de-Marsan,Nouvelle-Aquitaine,9242.6,428427,Péri-urbain,2
+41,Loir-et-Cher,Blois,Centre-Val de Loire,6343.4,328953,Rural,1
+42,Loire,Saint-Étienne,Auvergne-Rhône-Alpes,4780.6,772041,Péri-urbain,2
+43,Haute-Loire,Le Puy-en-Velay,Auvergne-Rhône-Alpes,4977.1,228161,Rural,1
+44,Loire-Atlantique,Nantes,Pays de la Loire,6874.4,1473156,Rural,1
+45,Loiret,Orléans,Centre-Val de Loire,6775.2,687063,Rural,1
+46,Lot,Cahors,Occitanie,5216.5,175620,Rural,1
+47,Lot-et-Garonne,Agen,Nouvelle-Aquitaine,5360.9,332226,Rural,1
+48,Lozère,Mende,Occitanie,5166.9,76503,Péri-urbain,2
+49,Maine-et-Loire,Angers,Pays de la Loire,7106.6,828151,Rural,1
+50,Manche,Saint-Lô,Normandie,5951.5,496815,Rural,1
+51,Marne,Châlons-en-Champagne,Grand Est,8169.1,564107,Rural,1
+52,Haute-Marne,Chaumont,Grand Est,6210.6,169865,Rural,1
+53,Mayenne,Laval,Pays de la Loire,5175.2,305437,Rural,1
+54,Meurthe-et-Moselle,Nancy,Grand Est,5245.9,732898,Péri-urbain,2
+55,Meuse,Bar-le-Duc,Grand Est,6211.4,180745,Rural,1
+56,Morbihan,Vannes,Bretagne,6822.6,776103,Rural,1
+57,Moselle,Metz,Grand Est,6216.3,1050721,Urbain,3
+58,Nièvre,Nevers,Bourgogne-Franche-Comté,6816.7,202299,Rural,1
+59,Nord,Lille,Hauts-de-France,5742.8,2616909,Rural,1
+60,Oise,Beauvais,Hauts-de-France,5860.2,830725,Rural,1
+61,Orne,Alençon,Normandie,6103.4,276144,Rural,1
+62,Pas-de-Calais,Arras,Hauts-de-France,6671.4,1460184,Rural,1
+63,Puy-de-Dôme,Clermont-Ferrand,Auvergne-Rhône-Alpes,7969.7,664385,Péri-urbain,2
+64,Pyrénées-Atlantiques,Pau,Nouvelle-Aquitaine,7644.8,699473,Péri-urbain,2
+65,Hautes-Pyrénées,Tarbes,Occitanie,4464,231453,Péri-urbain,2
+66,Pyrénées-Orientales,Perpignan,Occitanie,4116,492964,Péri-urbain,2
+67,Bas-Rhin,Strasbourg,Grand Est,4755,1156963,Urbain,3
+68,Haut-Rhin,Colmar,Grand Est,3525.2,767800,Urbain,3
+69,Rhône,Lyon,Auvergne-Rhône-Alpes,3249.1,1907982,Urbain,3
+70,Haute-Saône,Vesoul,Bourgogne-Franche-Comté,5360.1,233920,Rural,1
+71,Saône-et-Loire,Mâcon,Bourgogne-Franche-Comté,8574.7,549136,Rural,1
+72,Sarthe,Le Mans,Pays de la Loire,6206,566129,Rural,1
+73,Savoie,Chambéry,Auvergne-Rhône-Alpes,6028.3,445288,Urbain,3
+74,Haute-Savoie,Annecy,Auvergne-Rhône-Alpes,4387.8,849583,Urbain,3
+75,Paris,Paris,Île-de-France,105.4,2113705,Très urbain,4
+76,Seine-Maritime,Rouen,Normandie,6277.6,1260205,Péri-urbain,2
+77,Seine-et-Marne,Melun,Île-de-France,5915.3,1452399,Péri-urbain,2
+78,Yvelines,Versailles,Île-de-France,2284.4,1470778,Urbain,3
+79,Deux-Sèvres,Niort,Nouvelle-Aquitaine,5999.4,375415,Rural,1
+80,Somme,Amiens,Hauts-de-France,6170.1,565540,Rural,1
+81,Tarn,Albi,Occitanie,5757.9,396168,Rural,1
+82,Tarn-et-Garonne,Montauban,Occitanie,3718.3,264924,Rural,1
+83,Var,Toulon,Provence-Alpes-Côte d'Azur,5972.5,1108364,Urbain,3
+84,Vaucluse,Avignon,Provence-Alpes-Côte d'Azur,3567.3,568702,Péri-urbain,2
+85,Vendée,La Roche-sur-Yon,Pays de la Loire,6719.6,706343,Rural,1
+86,Vienne,Poitiers,Nouvelle-Aquitaine,6990.4,438688,Rural,1
+87,Haute-Vienne,Limoges,Nouvelle-Aquitaine,5520.1,372438,Rural,1
+88,Vosges,Épinal,Grand Est,5873.8,358700,Péri-urbain,2
+89,Yonne,Auxerre,Bourgogne-Franche-Comté,7427.4,333896,Rural,1
+90,Territoire de Belfort,Belfort,Bourgogne-Franche-Comté,609.4,140082,Péri-urbain,2
+91,Essonne,Évry-Courcouronnes,Île-de-France,1804.4,1324546,Urbain,3
+92,Hauts-de-Seine,Nanterre,Île-de-France,175.6,1647435,Très urbain,4
+93,Seine-Saint-Denis,Bobigny,Île-de-France,236.2,1681725,Très urbain,4
+94,Val-de-Marne,Créteil,Île-de-France,245,1419531,Très urbain,4
+95,Val-d'Oise,Pontoise,Île-de-France,1245.9,1270845,Urbain,3
+971,Guadeloupe,Basse-Terre,Guadeloupe,1628.4,383569,Péri-urbain,2
+972,Martinique,Fort-de-France,Martinique,1128,361019,Péri-urbain,2
+973,Guyane,Cayenne,Guyane,83533.9,288382,Péri-urbain,2
+974,La Réunion,Saint-Denis,La Réunion,2503.7,881348,Péri-urbain,2
+976,Mayotte,Mamoudzou,Mayotte,376,256518,Très urbain,4
