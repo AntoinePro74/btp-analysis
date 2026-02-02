@@ -1,0 +1,25 @@
+# Core (versions récentes compatibles M1)
+pandas>=2.2.0
+numpy>=1.26.0
+
+# API & Web
+requests>=2.31.0
+
+# Data formats
+pyarrow>=15.0.0
+
+# BigQuery
+google-cloud-bigquery>=3.14.0
+google-cloud-storage>=2.13.0
+pandas-gbq>=0.23.1
+
+# Géolocalisation
+pyproj>=3.6.0
+
+# Notebooks
+jupyter>=1.0.0
+notebook>=7.0.0
+
+# Utils
+python-dotenv>=1.0.0
+tqdm>=4.66.0
