@@ -1,40 +1,40 @@
-code_ape,libelle_ape,division_ape,division_libelle,famille_metier,nom_commun_metier
-41.10A,Promotion immobilière de logements,41,Construction de bâtiments,Promotion immobilière,Promoteur immobilier résidentiel
-41.10B,Promotion immobilière de bureaux,41,Construction de bâtiments,Promotion immobilière,Promoteur immobilier tertiaire
-41.10C,Promotion immobilière d'autres bâtiments,41,Construction de bâtiments,Promotion immobilière,Promoteur immobilier mixte
-41.10D,Supports juridiques de programmes,41,Construction de bâtiments,Promotion immobilière,Société de portage foncier
-41.20A,Construction de maisons individuelles,41,Construction de bâtiments,Construction résidentielle,Constructeur de maisons
-41.20B,Construction d'autres bâtiments,41,Construction de bâtiments,Construction résidentielle,Constructeur bâtiment collectif
-42.11Z,Construction de routes et autoroutes,42,Génie civil,Travaux publics routiers,Entreprise de travaux routiers
-42.12Z,Construction de voies ferrées de surface et souterraines,42,Génie civil,Travaux publics ferroviaires,Constructeur de voies ferrées
-42.13A,Construction d'ouvrages d'art,42,Génie civil,Travaux publics ouvrages d'art,Constructeur de ponts et viaducs
-42.13B,Construction et entretien de tunnels,42,Génie civil,Travaux publics souterrains,Entreprise de travaux souterrains
-42.21Z,Construction de réseaux pour fluides,42,Génie civil,Réseaux et canalisations,Poseur de canalisations
-42.22Z,Construction de réseaux électriques et de télécommunications,42,Génie civil,Réseaux électriques,Entreprise de réseaux électriques
-42.91Z,Construction d'ouvrages maritimes et fluviaux,42,Génie civil,Travaux maritimes et fluviaux,Constructeur d'ouvrages maritimes
-42.99Z,Construction d'autres ouvrages de génie civil n.c.a.,42,Génie civil,Autres génie civil,Entreprise de génie civil
-43.11Z,Travaux de démolition,43,Travaux de construction spécialisés,Démolition et terrassement,Entreprise de démolition
-43.12A,Travaux de terrassement courants et travaux préparatoires,43,Travaux de construction spécialisés,Démolition et terrassement,Terrassier
-43.12B,Travaux de terrassement spécialisés ou de grande masse,43,Travaux de construction spécialisés,Démolition et terrassement,Entreprise de terrassement
-43.13Z,Forages et sondages,43,Travaux de construction spécialisés,Forages,Entreprise de forage
-43.21A,Travaux d'installation électrique dans tous locaux,43,Travaux de construction spécialisés,Électricité,Électricien
-43.21B,Travaux d'installation électrique sur la voie publique,43,Travaux de construction spécialisés,Électricité,Électricien voirie et éclairage public
-43.22A,Travaux d'installation d'eau et de gaz en tous locaux,43,Travaux de construction spécialisés,Plomberie et chauffage,Plombier
-43.22B,Travaux d'installation d'équipements thermiques et de climatisation,43,Travaux de construction spécialisés,Plomberie et chauffage,Chauffagiste et climaticien
-43.29A,Travaux d'isolation,43,Travaux de construction spécialisés,Isolation et étanchéité,Entreprise d'isolation
-43.29B,Autres travaux d'installation n.c.a.,43,Travaux de construction spécialisés,Autres installations,Installateur spécialisé
-43.31Z,Travaux de plâtrerie,43,Travaux de construction spécialisés,Second œuvre,Plâtrier
-43.32A,Travaux de menuiserie bois et PVC,43,Travaux de construction spécialisés,Menuiserie,Menuisier
-43.32B,Travaux de menuiserie métallique et serrurerie,43,Travaux de construction spécialisés,Menuiserie,Serrurier-métallier
-43.32C,Agencement de lieux de vente,43,Travaux de construction spécialisés,Menuiserie,Agenceur de magasins
-43.33Z,Travaux de revêtement des sols et des murs,43,Travaux de construction spécialisés,Revêtements,Carreleur et revêtements
-43.34Z,Travaux de peinture et vitrerie,43,Travaux de construction spécialisés,Peinture,Peintre en bâtiment
-43.39Z,Autres travaux de finition,43,Travaux de construction spécialisés,Finitions,Entreprise de finitions
-43.91A,Travaux de charpente,43,Travaux de construction spécialisés,Charpente et couverture,Charpentier
-43.91B,Travaux de couverture par éléments,43,Travaux de construction spécialisés,Charpente et couverture,Couvreur
-43.99A,Travaux d'étanchéification,43,Travaux de construction spécialisés,Étanchéité,Étancheur
-43.99B,Travaux de montage de structures métalliques,43,Travaux de construction spécialisés,Structure métallique,Monteur de structures métalliques
-43.99C,Travaux de maçonnerie générale et gros œuvre de bâtiment,43,Travaux de construction spécialisés,Maçonnerie,Maçon
-43.99D,Autres travaux spécialisés de construction,43,Travaux de construction spécialisés,Autres travaux spécialisés,Artisan du bâtiment
-74.90A,Activité des économistes de la construction,74,Autres activités spécialisées,Bureaux d'études,Économiste de la construction
-81.30Z,Services d'aménagement paysager,81,Services relatifs aux bâtiments,Espaces verts,Paysagiste
+code_ape,libelle_ape,division_ape,division_libelle,famille_metier,nom_commun_metier,,score_priorite
+41.10A,Promotion immobilière de logements,41,Construction de bâtiments,Promotion immobilière,Promoteur immobilier résidentiel,,0
+41.10B,Promotion immobilière de bureaux,41,Construction de bâtiments,Promotion immobilière,Promoteur immobilier tertiaire,,0
+41.10C,Promotion immobilière d'autres bâtiments,41,Construction de bâtiments,Promotion immobilière,Promoteur immobilier mixte,,0
+41.10D,Supports juridiques de programmes,41,Construction de bâtiments,Promotion immobilière,Société de portage foncier,,0
+41.20A,Construction de maisons individuelles,41,Construction de bâtiments,Construction résidentielle,Constructeur de maisons,,20
+41.20B,Construction d'autres bâtiments,41,Construction de bâtiments,Construction résidentielle,Constructeur bâtiment collectif,,10
+42.11Z,Construction de routes et autoroutes,42,Génie civil,Travaux publics routiers,Entreprise de travaux routiers,,0
+42.12Z,Construction de voies ferrées de surface et souterraines,42,Génie civil,Travaux publics ferroviaires,Constructeur de voies ferrées,,0
+42.13A,Construction d'ouvrages d'art,42,Génie civil,Travaux publics ouvrages d'art,Constructeur de ponts et viaducs,,0
+42.13B,Construction et entretien de tunnels,42,Génie civil,Travaux publics souterrains,Entreprise de travaux souterrains,,0
+42.21Z,Construction de réseaux pour fluides,42,Génie civil,Réseaux et canalisations,Poseur de canalisations,,0
+42.22Z,Construction de réseaux électriques et de télécommunications,42,Génie civil,Réseaux électriques,Entreprise de réseaux électriques,,0
+42.91Z,Construction d'ouvrages maritimes et fluviaux,42,Génie civil,Travaux maritimes et fluviaux,Constructeur d'ouvrages maritimes,,0
+42.99Z,Construction d'autres ouvrages de génie civil n.c.a.,42,Génie civil,Autres génie civil,Entreprise de génie civil,,0
+43.11Z,Travaux de démolition,43,Travaux de construction spécialisés,Démolition et terrassement,Entreprise de démolition,,10
+43.12A,Travaux de terrassement courants et travaux préparatoires,43,Travaux de construction spécialisés,Démolition et terrassement,Terrassier,,10
+43.12B,Travaux de terrassement spécialisés ou de grande masse,43,Travaux de construction spécialisés,Démolition et terrassement,Entreprise de terrassement,,10
+43.13Z,Forages et sondages,43,Travaux de construction spécialisés,Forages,Entreprise de forage,,0
+43.21A,Travaux d'installation électrique dans tous locaux,43,Travaux de construction spécialisés,Électricité,Électricien,,10
+43.21B,Travaux d'installation électrique sur la voie publique,43,Travaux de construction spécialisés,Électricité,Électricien voirie et éclairage public,,0
+43.22A,Travaux d'installation d'eau et de gaz en tous locaux,43,Travaux de construction spécialisés,Plomberie et chauffage,Plombier,,10
+43.22B,Travaux d'installation d'équipements thermiques et de climatisation,43,Travaux de construction spécialisés,Plomberie et chauffage,Chauffagiste et climaticien,,25
+43.29A,Travaux d'isolation,43,Travaux de construction spécialisés,Isolation et étanchéité,Entreprise d'isolation,,25
+43.29B,Autres travaux d'installation n.c.a.,43,Travaux de construction spécialisés,Autres installations,Installateur spécialisé,,20
+43.31Z,Travaux de plâtrerie,43,Travaux de construction spécialisés,Second œuvre,Plâtrier,,20
+43.32A,Travaux de menuiserie bois et PVC,43,Travaux de construction spécialisés,Menuiserie,Menuisier,,25
+43.32B,Travaux de menuiserie métallique et serrurerie,43,Travaux de construction spécialisés,Menuiserie,Serrurier-métallier,,20
+43.32C,Agencement de lieux de vente,43,Travaux de construction spécialisés,Menuiserie,Agenceur de magasins,,10
+43.33Z,Travaux de revêtement des sols et des murs,43,Travaux de construction spécialisés,Revêtements,Carreleur et revêtements,,10
+43.34Z,Travaux de peinture et vitrerie,43,Travaux de construction spécialisés,Peinture,Peintre en bâtiment,,10
+43.39Z,Autres travaux de finition,43,Travaux de construction spécialisés,Finitions,Entreprise de finitions,,10
+43.91A,Travaux de charpente,43,Travaux de construction spécialisés,Charpente et couverture,Charpentier,,10
+43.91B,Travaux de couverture par éléments,43,Travaux de construction spécialisés,Charpente et couverture,Couvreur,,10
+43.99A,Travaux d'étanchéification,43,Travaux de construction spécialisés,Étanchéité,Étancheur,,10
+43.99B,Travaux de montage de structures métalliques,43,Travaux de construction spécialisés,Structure métallique,Monteur de structures métalliques,,0
+43.99C,Travaux de maçonnerie générale et gros œuvre de bâtiment,43,Travaux de construction spécialisés,Maçonnerie,Maçon,,10
+43.99D,Autres travaux spécialisés de construction,43,Travaux de construction spécialisés,Autres travaux spécialisés,Artisan du bâtiment,,10
+74.90A,Activité des économistes de la construction,74,Autres activités spécialisées,Bureaux d'études,Économiste de la construction,,0
+81.30Z,Services d'aménagement paysager,81,Services relatifs aux bâtiments,Espaces verts,Paysagiste,,10
