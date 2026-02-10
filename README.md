@@ -466,9 +466,6 @@ cp .env.example .env
 
 ---
 
-```markdown
----
-
 ## 👤 Auteur
 
 **Antoine Bineau**  
@@ -507,4 +504,7 @@ Vos retours, suggestions d'amélioration ou questions techniques sont les bienve
 🔀 Pull Request → Toute contribution documentée sera reviewée avec plaisir
 
 ⭐ Si ce projet vous inspire ou vous aide dans votre apprentissage, n'hésitez pas à le star sur GitHub !
+
+```
+
 ```
