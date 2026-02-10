@@ -418,54 +418,57 @@ cp .env.example .env
 - [ ] **Benchmark concurrentiel** : Scoring relatif par rapport concurrents identifiés
 - [ ] **Scoring individuel** : Extension dirigeants (API Pappers RNCS)
 
-📚 Compétences Techniques Illustrées
-🔧 Data Engineering
-ETL Production : Pipeline 5 étapes (Extract → Transform → Load → Validate → Publish)
+---
 
-API Management : Gestion rate-limiting, pagination, retry logic
+## 📚 Compétences Techniques Illustrées
 
-Batch Processing : Traitement 1M lignes avec chunking Pandas (optimisation mémoire)
+### 🔧 Data Engineering
 
-Data Quality : Framework validation (99,6% coverage, détection anomalies)
+- **ETL Production** : Pipeline 5 étapes (Extract → Transform → Load → Validate → Publish)
+- **API Management** : Gestion rate-limiting, pagination, retry logic
+- **Batch Processing** : Traitement 1M lignes avec chunking Pandas (optimisation mémoire)
+- **Data Quality** : Framework validation (99,6% coverage, détection anomalies)
 
-🗄️ Data Warehousing
-Modélisation dimensionnelle : Schéma en étoile (1 fait + 5 dimensions)
+### 🗄️ Data Warehousing
 
-BigQuery : Tables partitionnées, vues matérialisées, optimisation requêtes
+- **Modélisation dimensionnelle** : Schéma en étoile (1 fait + 5 dimensions)
+- **BigQuery** : Tables partitionnées, vues matérialisées, optimisation requêtes
+- **Typage strict** : Schémas explicites (INT64, STRING, DATE, FLOAT64)
+- **Dénormalisation stratégique** : Calcul multi-agences pré-agrégé (performance)
 
-Typage strict : Schémas explicites (INT64, STRING, DATE, FLOAT64)
+### 📊 Analytics & Scoring
 
-Dénormalisation stratégique : Calcul multi-agences pré-agrégé (performance)
+- **Scoring multi-critères** : Pondération métier validée terrain (5 dimensions, 130 points)
+- **Segmentation** : Logique hybride (score + critères métiers) pour segments actionnables
+- **Analyses territoriales** : Corrélations géographiques, détection zones sous-exploitées
+- **Distribution analysis** : Étude percentiles, outliers, gaussianité
 
-📊 Analytics & Scoring
-Scoring multi-critères : Pondération métier validée terrain (5 dimensions, 130 points)
+### ☁️ Cloud & DevOps
 
-Segmentation : Logique hybride (score + critères métiers) pour segments actionnables
+- **Google Cloud Platform** : BigQuery, IAM, Service Accounts
+- **Format Parquet** : Stockage intermédiaire optimisé (compression + typage)
+- **Logging structuré** : Traçabilité complète (timestamps, compteurs, erreurs)
+- **Git workflow** : .gitignore (données sensibles exclues), commits atomiques
 
-Analyses territoriales : Corrélations géographiques, détection zones sous-exploitées
+---
 
-Distribution analysis : Étude percentiles, outliers, gaussianité
+## 🛠️ Défis Techniques Rencontrés & Solutions
 
-☁️ Cloud & DevOps
-Google Cloud Platform : BigQuery, IAM, Service Accounts
+| 🚧 Défi                                    | ✅ Solution Implémentée                                       | 💡 Apprentissage                      |
+| ------------------------------------------ | ------------------------------------------------------------- | ------------------------------------- |
+| API SIRENE rate-limit (1000 req/jour)      | Batch nocturnes + cache Parquet local + retry exponential     | Gestion contraintes externes API      |
+| Volume 1M lignes (RAM limitée 16 Go)       | Chunking Pandas (100K lignes/batch) + garbage collection      | Optimisation mémoire Python           |
+| Scoring subjectif (pondération arbitraire) | Validation terrain avec commerciaux (3 itérations) → v1.3     | Méthodologie itérative métier         |
+| Types BigQuery incohérents post-upload     | Script `fix_categorie_juridique_type.py` + schémas explicites | Typage strict obligatoire             |
+| Doublons SIRET (multi-établissements)      | Dédoublonnage par SIRET + agrégation SIREN (comptage agences) | Modèle INSEE (SIREN/SIRET)            |
+| Segmentation Grands Comptes pollue Premium | Critère anti-grands-groupes (>20 agences) → segment dédié     | Segmentation hybride (score + règles) |
+| Performance BigQuery (vues lentes)         | Index sur `siret` + partitionnement par `departement`         | Optimisation requêtes DWH             |
 
-Format Parquet : Stockage intermédiaire optimisé (compression + typage)
-
-Logging structuré : Traçabilité complète (timestamps, compteurs, erreurs)
-
-Git workflow : .gitignore (données sensibles exclues), commits atomiques
-
-🛠️ Défis Techniques Rencontrés & Solutions
-🚧 Défi ✅ Solution Implémentée 💡 Apprentissage
-API SIRENE rate-limit (1000 req/jour) Batch nocturnes + cache Parquet local + retry exponential Gestion contraintes externes API
-Volume 1M lignes (RAM limitée 16 Go) Chunking Pandas (100K lignes/batch) + garbage collection Optimisation mémoire Python
-Scoring subjectif (pondération initiale arbitraire) Validation terrain avec commerciaux (3 itérations) → v1.3 Méthodologie itérative métier
-Types BigQuery incohérents post-upload Script fix_categorie_juridique_type.py + schémas explicites Typage strict obligatoire
-Doublons SIRET (multi-établissements) Dédoublonnage par SIRET + agrégation SIREN (comptage agences) Modèle INSEE (SIREN/SIRET)
-Segmentation Grands Comptes pollue Premium Critère anti-grands-groupes (>20 agences) → segment dédié Segmentation hybride (score + règles)
-Performance BigQuery (vues lentes) Index sur siret + partitionnement par departement Optimisation requêtes DWH
+---
 
 ```markdown
+---
+
 ## 👤 Auteur
 
 **Antoine Bineau**  
@@ -478,7 +481,8 @@ Key Account Manager | Data Analyst & Business Intelligence
 📅 **Période** : Novembre 2025  
 ⏱️ **Durée** : ~80 heures (réparties sur 3 semaines)  
 🎯 **Objectif** : Démontrer capacités ETL, scoring métier, modélisation DWH sur données réelles volumineuses (1M+ lignes)
-```
+
+---
 
 ## 📝 Licence & Mentions Légales
 
@@ -503,3 +507,4 @@ Vos retours, suggestions d'amélioration ou questions techniques sont les bienve
 🔀 Pull Request → Toute contribution documentée sera reviewée avec plaisir
 
 ⭐ Si ce projet vous inspire ou vous aide dans votre apprentissage, n'hésitez pas à le star sur GitHub !
+```
