@@ -131,20 +131,26 @@ Le scoring repose sur **5 dimensions pondérées** analysant la "maturité comme
 #### 📐 Détails par Dimension
 
 **1️⃣ Taille Entreprise (0-40 pts)**
-0 salarié (EI/Micro) → 5 pts
-1-2 salariés → 15 pts
-3-5 salariés → 25 pts
-6-9 salariés → 30 pts
-10-19 salariés ⭐ → 35 pts (sweet spot PME)
-20-49 salariés → 40 pts
-50+ salariés → 40 pts (plafonné)
+
+```text
+0 salarié (EI/Micro)         →  5 pts
+1-2 salariés                 → 15 pts
+3-5 salariés                 → 25 pts
+6-9 salariés                 → 30 pts
+10-19 salariés ⭐            → 35 pts (sweet spot PME)
+20-49 salariés               → 40 pts
+50+ salariés                 → 40 pts (plafonné)
+```
 
 **Rationale** : 10-19 salariés = PME structurée capable d'investir sans lourdeur décisionnelle grands groupes
 
 **2️⃣ Profil Territorial (0-25 pts)**
-Rural isolé → 5 pts
-Urbain dense → 20 pts
-Très urbain (métropoles) ⭐ → 25 pts
+
+```text
+Rural isolé                  →  5 pts
+Urbain dense                 → 20 pts
+Très urbain (métropoles) ⭐  → 25 pts
+```
 
 **Rationale** : Zones urbaines = + de chantiers, + de complexité coordination, + besoin digitalisation
 
@@ -157,17 +163,23 @@ Très urbain (métropoles) ⭐ → 25 pts
 | **Basse**   | 43.34 (Peinture), 43.99 (Petits travaux)            | 10     | Artisans, faible budget digitale          |
 
 **4️⃣ Multi-Agences (0-20 pts)**
-1 établissement → 0 pts
-2 établissements → 5 pts
-3-4 établissements → 10 pts
-5+ établissements ⭐ → 20 pts
+
+```text
+1 établissement              →  0 pts
+2 établissements             →  5 pts
+3-4 établissements           → 10 pts
+5+ établissements ⭐         → 20 pts
+```
 
 **Rationale** : Multi-sites = expansion réussie, gestion multi-chantiers, besoins coordination
 
 **5️⃣ Forme Juridique (0-20 pts)**
-Entrepreneur Individuel → 5 pts
-SARL/SAS/SA ⭐ → 20 pts
-Autres (SNC, SCI) → 10 pts
+
+```text
+Entrepreneur Individuel      →  5 pts
+SARL/SAS/SA ⭐               → 20 pts
+Autres (SNC, SCI)            → 10 pts
+```
 
 **Rationale** : Sociétés commerciales = capitaux, capacité investissement, pérennité
 
