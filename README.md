@@ -59,7 +59,7 @@
 ┌──────────────────────────────────────────────────────────────────┐
 │ EXTRACTION (Collection) │
 ├──────────────────────────────────────────────────────────────────┤
-│ API SIRENE (39 codes NAF × 107 départements) │
+│ API SIRENE (39 codes NAF × 101 départements) │
 │ └─ api_sirene.py : Batch pagination + rate-limiting │
 │ ↓ │
 │ JSON bruts → data/raw/ (versionnés par date) │
