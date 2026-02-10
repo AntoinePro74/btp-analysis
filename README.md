@@ -234,7 +234,7 @@ Le scoring seul ne suffit pas : la segmentation croise **score + critères méti
 
 ### 🗺️ Insights Territoriaux
 
-**Top 10 Départements - Premium PME (438 cibles)**
+**Top 5 Départements - Premium PME (438 cibles)**
 
 | Rang | Dép. | Nom                          | Premium PME | % du segment |
 | ---- | ---- | ---------------------------- | ----------- | ------------ |
