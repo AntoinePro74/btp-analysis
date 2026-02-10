@@ -55,10 +55,11 @@
 
 #### 🔄 Architecture du Pipeline
 
+```bash
 ┌──────────────────────────────────────────────────────────────────┐
 │ EXTRACTION (Collection) │
 ├──────────────────────────────────────────────────────────────────┤
-│ API SIRENE (23 codes NAF × 96 départements) │
+│ API SIRENE (39 codes NAF × 107 départements) │
 │ └─ api_sirene.py : Batch pagination + rate-limiting │
 │ ↓ │
 │ JSON bruts → data/raw/ (versionnés par date) │
@@ -102,6 +103,7 @@
 │ VISUALISATION (Power BI / SQL Analytics) │
 │ Dashboard segmentation + Analyses territoriales │
 └──────────────────────────────────────────────────────────────────┘
+```
 
 Orchestration : pipeline_full.py (exécution complète) + logs structurés
 Validation : test_pipeline_quick.py (1 département test)
@@ -344,14 +346,14 @@ btp-analysis/
 
 ### Prérequis
 
-Environnement :
+#### Environnement
 
 - Python 3.11+
 - Compte Google Cloud Platform (projet actif + BigQuery API activée)
-- Clé API SIRENE (gratuite : api.insee.fr)
+- Clé API SIRENE (gratuite : [api.insee.fr](https://api.insee.fr))
 - Power BI Desktop (pour visualisation finale)
 
-### Ressources système :
+#### Ressources Système
 
 - RAM : 16 Go recommandé (traitement 1M lignes en mémoire)
 - Stockage : 10 Go libres (Parquet intermédiaires ~3 Go)
@@ -359,62 +361,50 @@ Environnement :
 
 ### Installation
 
+```bash
 # 1. Cloner le repository
-
 git clone https://github.com/AntoinePro74/btp-analysis.git
 cd btp-analysis
 
 # 2. Créer environnement virtuel Python
-
 python -m venv venv
-source venv/bin/activate # Linux/Mac
-
-# venv\Scripts\activate # Windows
+source venv/bin/activate          # Linux/Mac
+# venv\Scripts\activate           # Windows
 
 # 3. Installer dépendances
-
 pip install -r requirements.txt
 
 # 4. Configurer credentials
-
 cp .env.example .env
 
 # 5. Éditer .env avec vos credentials :
-
 # SIRENE_API_KEY=votre_cle_api_sirene
-
 # GOOGLE_APPLICATION_CREDENTIALS=/chemin/vers/gcp-service-account.json
-
 # GCP_PROJECT_ID=votre-projet-gcp
-
 # BQ_DATASET=btp_analysis
+```
 
 ## 📈 Évolutions Futures (Roadmap)
 
-Phase 2 - Enrichissement Financier
-Intégration API Pappers : Bilans comptables (CA réel, résultat net, fonds propres)
+### Phase 2 - Enrichissement Financier
 
-Scoring financier : Nouvelle dimension "Santé financière" (0-30 pts) → Scoring 160 pts total
+- [ ] **Intégration API Pappers** : Bilans comptables (CA réel, résultat net, fonds propres)
+- [ ] **Scoring financier** : Nouvelle dimension "Santé financière" (0-30 pts) → Scoring 160 pts total
+- [ ] **Détection signaux faibles** : Redressements/liquidations judiciaires → Flag risque
 
-Détection signaux faibles : Redressements/liquidations judiciaires → Flag risque
+### Phase 3 - Prédictif & Automatisation
 
-Phase 3 - Prédictif & Automatisation
-Machine Learning : Modèle prédictif probabilité conversion (XGBoost sur historique)
+- [ ] **Machine Learning** : Modèle prédictif probabilité conversion (XGBoost sur historique)
+- [ ] **Refresh automatisé** : Orchestration Airflow (mise à jour mensuelle SIRENE)
+- [ ] **API REST** : Endpoint scoring temps réel (`GET /api/v1/score/{siret}`)
+- [ ] **Webhooks** : Alertes nouveaux établissements Premium PME (email/Slack)
 
-Refresh automatisé : Orchestration Airflow (mise à jour mensuelle SIRENE)
+### Phase 4 - Extension & Benchmark (2027)
 
-API REST : Endpoint scoring temps réel (GET /api/v1/score/{siret})
-
-Webhooks : Alertes nouveaux établissements Premium PME (email/Slack)
-
-Phase 4 - Extension & Benchmark (2027)
-Multi-secteurs : Adaptation méthodologie (Retail, Services, Industrie)
-
-Time-series : Suivi évolution scoring mensuel (détection tendances)
-
-Benchmark concurrentiel : Scoring relatif par rapport concurrents identifiés
-
-Scoring individuel : Extension dirigeants (API Pappers RNCS)
+- [ ] **Multi-secteurs** : Adaptation méthodologie (Retail, Services, Industrie)
+- [ ] **Time-series** : Suivi évolution scoring mensuel (détection tendances)
+- [ ] **Benchmark concurrentiel** : Scoring relatif par rapport concurrents identifiés
+- [ ] **Scoring individuel** : Extension dirigeants (API Pappers RNCS)
 
 📚 Compétences Techniques Illustrées
 🔧 Data Engineering
@@ -463,18 +453,20 @@ Doublons SIRET (multi-établissements) Dédoublonnage par SIRET + agrégation SI
 Segmentation Grands Comptes pollue Premium Critère anti-grands-groupes (>20 agences) → segment dédié Segmentation hybride (score + règles)
 Performance BigQuery (vues lentes) Index sur siret + partitionnement par departement Optimisation requêtes DWH
 
+```markdown
 ## 👤 Auteur
 
-**Antoine Bineau**
+**Antoine Bineau**  
 Key Account Manager | Data Analyst & Business Intelligence
-🔗 [LinkedIn] (https://www.linkedin.com/in/antoine-bineau/)
 
-Projet personnel réalisé dans le cadre de ma montée en compétences Data Analysis / Analytics Engineering
+🔗 [LinkedIn](https://www.linkedin.com/in/antoine-bineau/)
 
-## 📅 Période : Novembre 2025
+**Projet personnel réalisé dans le cadre de ma montée en compétences Data Analysis / Analytics Engineering**
 
-⏱️ Durée : ~80 heures (réparties sur 3 semaines)
-🎯 Objectif : Démontrer capacités ETL, scoring métier, modélisation DWH sur données réelles volumineuses (1M+ lignes)
+📅 **Période** : Novembre 2025  
+⏱️ **Durée** : ~80 heures (réparties sur 3 semaines)  
+🎯 **Objectif** : Démontrer capacités ETL, scoring métier, modélisation DWH sur données réelles volumineuses (1M+ lignes)
+```
 
 ## 📝 Licence & Mentions Légales
 
