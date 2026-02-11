@@ -224,6 +224,7 @@ Ligne	test_id	code_departement	nb_cibles_premium	score_moyen	nb_ape_haute	nb_ape
 9	TEST 2.6 - Top 10 depts Premium	13	17	107.4	10	7	82.4
 10	TEST 2.6 - Top 10 depts Premium	62	17	92.4	11	6	52.9
 
+
 -- 🎯 Insights stratégiques pour le Go-to-Market
 -- Priorisation géographique Sales (Top 5)
 -- 🥇 Nord (59) - Lille : 34 cibles, mix APE équilibré, 76% multi-agences
@@ -232,3 +233,92 @@ Ligne	test_id	code_departement	nb_cibles_premium	score_moyen	nb_ape_haute	nb_ape
 --4️⃣ Loire-Atlantique (44) - Nantes : 28 cibles, 71% multi-agences
 --5️⃣ Seine-Saint-Denis (93) : 21 cibles, score 107, zone dynamique
 --→ Ces 5 départements = 164 cibles premium (27% du total) ! 🎯
+
+
+-- TEST de la version 1.4
+-- Test de validation post création vue
+
+-- Volume par segment
+SELECT 
+  'Volumes v1.4' AS version,
+  SUM(CASE WHEN est_cible_premium THEN 1 ELSE 0 END) AS nb_premium,
+  SUM(CASE WHEN est_cible_prioritaire THEN 1 ELSE 0 END) AS nb_prioritaire,
+  SUM(CASE WHEN est_cible_secondaire THEN 1 ELSE 0 END) AS nb_secondaire,
+  SUM(CASE WHEN est_grand_compte THEN 1 ELSE 0 END) AS nb_gc_siret,
+  COUNT(DISTINCT CASE WHEN est_grand_compte THEN siren END) AS nb_gc_siren
+FROM `btp_analysis.v_etablissements_btp_global`;
+
+-- Vérifier la répartition 20-49 / 50-99 / 100-199
+SELECT 
+  code_effectifs,
+  libelle_effectifs,
+  COUNT(*) AS nb_premium,
+  ROUND(COUNT(*) * 100.0 / 2975, 1) AS pct,
+  ROUND(AVG(score_total), 1) AS score_moyen
+FROM `btp_analysis.v_etablissements_btp_global`
+WHERE est_cible_premium = TRUE
+GROUP BY code_effectifs, libelle_effectifs
+ORDER BY code_effectifs;
+
+-- Identifier les départements les plus riches en cibles Premium
+SELECT 
+  code_departement,
+  COUNT(*) AS nb_premium,
+  ROUND(AVG(score_total), 1) AS score_moyen,
+  STRING_AGG(DISTINCT libelle_ape LIMIT 3) AS top_ape
+FROM `btp_analysis.v_etablissements_btp_global`
+WHERE est_cible_premium = TRUE
+GROUP BY code_departement
+ORDER BY nb_premium DESC
+LIMIT 20;
+
+-- Vérifier la répartition Haute/Moyenne priorité APE
+SELECT 
+  CASE 
+    WHEN score_potentiel_ape = 25 THEN 'Haute priorité (25 pts)'
+    WHEN score_potentiel_ape = 20 THEN 'Moyenne priorité (20 pts)'
+  END AS niveau_ape,
+  COUNT(*) AS nb_premium,
+  ROUND(COUNT(*) * 100.0 / 2975, 1) AS pct,
+  STRING_AGG(DISTINCT libelle_ape LIMIT 5) AS codes_ape
+FROM `btp_analysis.v_etablissements_btp_global`
+WHERE est_cible_premium = TRUE
+GROUP BY niveau_ape
+ORDER BY niveau_ape DESC;
+
+-- Résultat obtenu :
+1.
+Ligne code_effectifs libelle_effectifs nb_premium score_moyen
+1 12 20-49 2556 102.0
+2 21 50-99 344 105.0
+3 22 100-199 75 109.0
+
+2.
+Ligne code_departement nb_premium score_moyen top_ape
+1 59 108 97.1 Travaux de menuiserie métallique et serrurerie,Autres travaux d'installation n.c.a.,Travaux d'installation d'équipements thermiques et de climatisation
+2 93 105 109.5 Travaux de menuiserie métallique et serrurerie,Travaux d'isolation,Autres travaux d'installation n.c.a.
+3 69 97 108.6 Travaux de menuiserie métallique et serrurerie,Travaux d'isolation,Travaux de plâtrerie
+4 77 92 100.8 Travaux d'isolation,Autres travaux d'installation n.c.a.,Travaux de plâtrerie
+5 62 86 97.0 Travaux de menuiserie métallique et serrurerie,Travaux d'isolation,Autres travaux d'installation n.c.a.
+6 67 79 106.3 Travaux d'isolation,Travaux d'installation d'équipements thermiques et de climatisation,Travaux de plâtrerie
+7 13 76 109.7 Travaux de menuiserie métallique et serrurerie,Autres travaux d'installation n.c.a.,Travaux d'installation d'équipements thermiques et de climatisation
+8 94 75 110.5 Travaux de menuiserie métallique et serrurerie,Autres travaux d'installation n.c.a.,Travaux d'installation d'équipements thermiques et de climatisation
+9 33 72 103.1 Autres travaux d'installation n.c.a.,Travaux d'installation d'équipements thermiques et de climatisation,Travaux de plâtrerie
+10 44 71 96.4 Travaux de plâtrerie,Construction de maisons individuelles,Travaux de menuiserie métallique et serrurerie
+11 78 64 105.5 Travaux d'isolation,Autres travaux d'installation n.c.a.,Construction de maisons individuelles
+12 76 63 101.8 Travaux de menuiserie métallique et serrurerie,Travaux d'isolation,Travaux d'installation d'équipements thermiques et de climatisation
+13 95 60 106.7 Travaux d'isolation,Travaux d'installation d'équipements thermiques et de climatisation,Travaux de menuiserie bois et PVC
+14 31 59 103.1 Travaux de menuiserie métallique et serrurerie,Autres travaux d'installation n.c.a.,Construction de maisons individuelles
+15 29 59 99.2 Travaux de menuiserie métallique et serrurerie,Travaux d'isolation,Travaux de plâtrerie
+16 35 59 103.8 Autres travaux d'installation n.c.a.,Travaux de plâtrerie,Construction de maisons individuelles
+17 91 57 106.3 Travaux d'isolation,Travaux d'installation d'équipements thermiques et de climatisation,Travaux de plâtrerie
+18 49 56 95.5 Travaux de menuiserie métallique et serrurerie,Travaux d'isolation,Travaux d'installation d'équipements thermiques et de climatisation
+19 42 54 101.4 Autres travaux d'installation n.c.a.,Travaux d'installation d'équipements thermiques et de climatisation,Travaux de plâtrerie
+20 85 52 98.0 Autres travaux d'installation n.c.a.,Travaux d'installation d'équipements thermiques et de climatisation,Travaux de plâtrerie
+
+3.
+Ligne niveau_ape nb_premium pct codes_ape
+1 Moyenne priorité (20 pts) 1175 39.5 Travaux de menuiserie métallique et serrurerie,Construction de maisons individuelles,Autres travaux d'installation n.c.a.,Travaux de plâtrerie
+2 Haute priorité (25 pts) 1800 60.5 Travaux d'isolation,Travaux de menuiserie bois et PVC,Travaux d'installation d'équipements thermiques et de climatisation
+
+-- Tout est ok

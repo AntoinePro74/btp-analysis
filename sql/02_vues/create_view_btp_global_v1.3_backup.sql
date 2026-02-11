@@ -1,15 +1,8 @@
 -- ============================================================================
 -- Fichier : sql/02_vues/create_view_btp_global.sql
 -- Description : Vue consolidée tous codes APE BTP avec scoring optimisé
--- Version : 1.4 (CORRECTION codes effectifs INSEE - cible PME 20-199 sal)
--- Date : 2026-02-11
--- 
--- CHANGEMENTS MAJEURS v1.3 → v1.4 :
--- - Correction mapping codes effectifs INSEE (erreur détectée)
--- - Nouvelle cible Premium : 20-199 sal/établissement (vs 50-499 en v1.3)
--- - Scoring taille simplifié : plateau à 40 pts dès 20+ salariés
--- - Volume Premium optimisé : ~3,000 cibles (vs 438 en v1.3)
--- - Les 10-19 sal basculent en Prioritaire (marketing automation)
+-- Version : 1.3 (Segmentation PME/Grands Comptes - seuil 20 agences)
+-- Date : 2026-02-08
 -- 
 -- Périmètre :
 -- - ~1M établissements BTP actifs
@@ -19,17 +12,17 @@
 -- - Segmentation commerciale (4 flags : 3 PME + 1 Grands Comptes)
 -- 
 -- Scoring optimisé :
--- - Taille entreprise : 0-40 pts (31%) - Critère dominant, plateau à 20+ sal
+-- - Taille entreprise : 0-40 pts (31%) - Critère dominant
 -- - Profil territorial : 0-25 pts (19%)
 -- - Potentiel APE : 0-25 pts (19%) - Basse = 10 pts
 -- - Bonus multi-agences : 0-20 pts (15%)
 -- - Forme juridique : 0-20 pts (15%)
 -- 
 -- Segmentation commerciale :
--- - Cible Premium PME : Score ≥78 + 20-199 sal + APE ≥20 + ≤20 agences (~3,000)
--- - Cible Prioritaire : Score ≥70 + 10-199 sal + APE ≥20 + ≤50 agences (~12,000)
--- - Cible Secondaire : Score ≥52 + 6-199 sal + ≤50 agences (~15,000)
--- - Grand Compte : Score ≥78 + >20 agences (~89 entreprises)
+-- - Cible Premium PME : Score ≥78 + 6-49 sal + APE ≥20 + ≤20 agences (~440)
+-- - Cible Prioritaire : Score ≥70 + 1-49 sal + APE ≥20 + ≤50 agences (~8,000)
+-- - Cible Secondaire : Score ≥52 + 1-49 sal + ≤50 agences (~30,000)
+-- - Grand Compte : Score ≥78 + >20 agences OU 50+ sal/étab (~200)
 -- ============================================================================
 
 
@@ -151,47 +144,24 @@ scoring AS (
     -- ========================================================================
     -- DIMENSION 2 : Taille entreprise (0-40 pts) - 31% CRITÈRE DOMINANT
     -- ========================================================================
-    -- CODES EFFECTIFS INSEE (CORRIGÉS v1.4) :
-    -- NN/00 = 0 salarié
-    -- 01 = 1-2 salariés
-    -- 02 = 3-5 salariés
-    -- 03 = 6-9 salariés
-    -- 11 = 10-19 salariés
-    -- 12 = 20-49 salariés
-    -- 21 = 50-99 salariés
-    -- 22 = 100-199 salariés
-    -- 31 = 200-249 salariés
-    -- 32 = 250-499 salariés
-    -- 41 = 500-999 salariés
-    -- 42 = 1000-1999 salariés
-    -- 51-53 = 2000+ salariés
-    -- 
-    -- LOGIQUE SIMPLIFIÉE :
-    -- - Progression jusqu'à 20-49 sal (40 pts = maximum)
-    -- - Plateau à 40 pts pour 50+ sal (pas de bonus supplémentaire)
-    -- - Sweet spot cible : 20-199 salariés pour Premium (score 40 pts)
-    -- ========================================================================
     CASE 
-      -- 🎯 SWEET SPOT : 20-49 salariés (optimal PME) - MAXIMUM DE POINTS
-      WHEN b.trancheEffectifsEtablissement = '12' THEN 40
+      -- Grandes structures (200-999 salariés)
+      WHEN b.trancheEffectifsEtablissement IN ('53', '52', '51') THEN 40
       
-      -- 50+ salariés : PLAFONNÉ à 40 pts (pas de surpondération grosse structure)
-      WHEN b.trancheEffectifsEtablissement IN ('21', '22', '31', '32', '41', '42', '51', '52', '53') THEN 40
+      -- Structures développées (50-199 salariés)
+      WHEN b.trancheEffectifsEtablissement IN ('42', '41', '32', '31') THEN 38
       
-      -- 10-19 salariés (petite PME structurée) - Cible Prioritaire
-      WHEN b.trancheEffectifsEtablissement = '11' THEN 35
+      -- 🎯 CIBLE SWEET SPOT : 10-19 salariés
+      WHEN b.trancheEffectifsEtablissement = '22' THEN 35
       
-      -- 6-9 salariés (micro structurée)
-      WHEN b.trancheEffectifsEtablissement = '03' THEN 30
+      -- ✅ CIBLE PRIORITAIRE : 6-9 salariés
+      WHEN b.trancheEffectifsEtablissement = '21' THEN 30
       
-      -- 3-5 salariés (micro-entreprise)
-      WHEN b.trancheEffectifsEtablissement = '02' THEN 20
+      -- Micro-entreprises (1-5 salariés)
+      WHEN b.trancheEffectifsEtablissement IN ('12', '11') THEN 15
       
-      -- 1-2 salariés (très petite structure)
-      WHEN b.trancheEffectifsEtablissement = '01' THEN 15
-      
-      -- 0 salarié ou non renseigné (EI sans salarié, hors cible)
-      WHEN b.trancheEffectifsEtablissement IN ('00', 'NN') THEN 5
+      -- Non employeur ou non renseigné
+      WHEN b.trancheEffectifsEtablissement IN ('03', '02', '01', '00', 'NN') THEN 5
       
       ELSE 5
     END AS score_taille_entreprise,
@@ -284,36 +254,32 @@ SELECT
   END AS categorie_potentiel,
   
   -- ========================================================================
-  -- FLAG 1 : CIBLE PREMIUM PME (20-199 sal, max 20 agences)
+  -- FLAG 1 : CIBLE PREMIUM PME (ultra-qualifiée, max 20 agences)
   -- ========================================================================
-  -- Critères : Score ≥78 + 20-199 salariés/établissement + APE ≥20 + ≤20 agences
-  -- Volume : ~3,000 établissements (2,556 + 344 + 75)
-  -- Score moyen : 102.5
-  -- Usage : Prospection Sales directe PME, démo personnalisée, CSM dédié
-  -- Profil type : PME régionales 20-199 sal (chauffagiste, isolation, menuiserie)
-  -- Charge commerciale : 3-5 Sales à temps plein
+  -- Critères : Score ≥78 + 6-49 salariés + APE haute/moyenne + Max 20 agences
+  -- Volume : ~440 établissements (0.04%)
+  -- Usage : Prospection Sales directe PME, démo personnalisée, CSM
+  -- Exclut : Grands groupes nationaux (ENGIE, Proxiserve, Axima...)
   CASE 
     WHEN (score_profil_territorial + score_taille_entreprise + 
           score_forme_juridique + score_potentiel_ape + bonus_multi_agences) >= 78 
-         AND code_effectifs IN ('12', '21', '22')  -- 20-199 salariés/établissement
+         AND code_effectifs IN ('22', '21', '31', '32')  -- 6-49 salariés
          AND score_potentiel_ape >= 20  -- APE haute (25) ou moyenne (20)
-         AND nb_etablissements <= 20  -- Max 20 agences (PME, pas groupe national)
+         AND nb_etablissements <= 20  -- Max 20 agences (PME en croissance)
     THEN TRUE
     ELSE FALSE
   END AS est_cible_premium,
   
   -- ========================================================================
-  -- FLAG 2 : CIBLE PRIORITAIRE (10-199 sal, max 50 agences)
+  -- FLAG 2 : CIBLE PRIORITAIRE (micro-entreprises, max 50 agences)
   -- ========================================================================
-  -- Critères : Score ≥70 + 10-199 salariés/établissement + APE ≥20 + ≤50 agences
-  -- Volume : ~12,000 établissements (inclut les 10-19 sal exclus de Premium)
-  -- Score moyen : 95-100
-  -- Usage : Marketing automation, webinaires, essais gratuits, nurturing
-  -- Profil : Petites PME 10-19 sal + PME moyennes 20-199 sal (métiers prioritaires)
+  -- Critères : Score ≥70 + 1-49 salariés + APE haute/moyenne + Max 50 agences
+  -- Volume : ~8,000 établissements (0.8%)
+  -- Usage : Campagnes marketing ciblées, webinaires, essais gratuits
   CASE 
     WHEN (score_profil_territorial + score_taille_entreprise + 
           score_forme_juridique + score_potentiel_ape + bonus_multi_agences) >= 70 
-         AND code_effectifs IN ('11', '12', '21', '22')  -- 10-199 salariés/établissement
+         AND code_effectifs IN ('22', '21', '31', '32', '12', '11')  -- 1-49 salariés
          AND score_potentiel_ape >= 20  -- APE haute ou moyenne
          AND nb_etablissements <= 50  -- Max 50 agences
     THEN TRUE
@@ -321,32 +287,31 @@ SELECT
   END AS est_cible_prioritaire,
   
   -- ========================================================================
-  -- FLAG 3 : CIBLE SECONDAIRE (6-199 sal, max 50 agences)
+  -- FLAG 3 : CIBLE SECONDAIRE (potentiel moyen, max 50 agences)
   -- ========================================================================
-  -- Critères : Score ≥52 + 6-199 salariés/établissement + ≤50 agences
-  -- Volume : ~15,000 établissements
+  -- Critères : Score ≥52 + 1-49 salariés + Max 50 agences
+  -- Volume : ~30,000 établissements (3%)
   -- Usage : Inbound marketing, contenus, SEO, self-service
-  -- Profil : Tous métiers BTP, micro-entreprises structurées (6-9 sal) + PME
   CASE 
     WHEN (score_profil_territorial + score_taille_entreprise + 
           score_forme_juridique + score_potentiel_ape + bonus_multi_agences) >= 52 
-         AND code_effectifs IN ('03', '11', '12', '21', '22')  -- 6-199 salariés/établissement
+         AND code_effectifs IN ('22', '21', '31', '32', '12', '11')  -- 1-49 salariés
          AND nb_etablissements <= 50  -- Max 50 agences
     THEN TRUE
     ELSE FALSE
   END AS est_cible_secondaire,
   
   -- ========================================================================
-  -- FLAG 4 : GRAND COMPTE (>20 agences uniquement)
+  -- FLAG 4 : GRAND COMPTE (>20 agences OU 50+ salariés/établissement)
   -- ========================================================================
-  -- Critères : Score ≥78 + >20 agences
-  -- Volume : ~89 entreprises (SIREN) / ~4,100 établissements (SIRET)
-  -- Usage : Approche Grands Comptes (RFP, POC 3-6 mois, CSM dédié niveau groupe)
-  -- Exemples : ENGIE Home Services (212), Proxiserve (104), Axima (79), Hervé (90)
+  -- Critères : Score ≥78 + (>20 agences OU 50+ salariés/établissement)
+  -- Volume : ~200 établissements
+  -- Usage : Approche Grands Comptes (RFP, POC 3-6 mois, CSM dédié)
+  -- Exemples : ENGIE Home Services, Proxiserve, Axima, Hervé Thermique
   CASE 
     WHEN (score_profil_territorial + score_taille_entreprise + 
           score_forme_juridique + score_potentiel_ape + bonus_multi_agences) >= 78 
-         AND nb_etablissements > 20  -- Plus de 20 agences (structure groupe)
+         AND (nb_etablissements > 20)  -- Plus de 20 agences
     THEN TRUE
     ELSE FALSE
   END AS est_grand_compte
@@ -355,5 +320,5 @@ FROM scoring;
 
 
 -- ============================================================================
--- FIN DU SCRIPT v1.4
+-- FIN DU SCRIPT
 -- ============================================================================
