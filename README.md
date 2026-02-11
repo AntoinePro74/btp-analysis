@@ -156,11 +156,79 @@ Très urbain (métropoles) ⭐  → 25 pts
 
 **3️⃣ Potentiel APE (0-25 pts)**
 
-| Catégorie   | Codes APE (exemples)                                | Points | Rationale                                 |
-| ----------- | --------------------------------------------------- | ------ | ----------------------------------------- |
-| **Haute**   | 41.1 (Promo), 41.2 (Gros œuvre), 42.1 (Génie civil) | 25     | CA élevé, cycles longs, besoins logiciels |
-| **Moyenne** | 43.2 (Installation élec), 43.22 (Plomberie)         | 20     | PME techniques, récurrence chantiers      |
-| **Basse**   | 43.34 (Peinture), 43.99 (Petits travaux)            | 10     | Artisans, faible budget digitale          |
+Le scoring par code APE reflète le **potentiel commercial** de chaque secteur d'activité (CA moyen, besoins digitaux, récurrence projets).
+
+| Score     | Nombre de codes | Codes APE (exemples)                                                                           | Rationale Business                                                      |
+| --------- | --------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| **25** ⭐ | 3 codes         | 43.22B (Chauffage/Clim), 43.29A (Isolation), 43.32A (Menuiserie)                               | **Top priorité** : Besoins récurrents, CA élevé, digitalisation forte   |
+| **20**    | 4 codes         | 41.20A (Construction maisons), 43.29B (Installations), 43.31Z (Plâtrerie), 43.32B (Serrurerie) | **Priorité haute** : PME structurées, projets moyens/longs termes       |
+| **10**    | 20 codes        | 43.21A (Électricité), 43.22A (Plomberie), 43.99C (Maçonnerie)                                  | **Priorité standard** : Artisans/TPE, projets courts                    |
+| **0**     | 14 codes        | 41.10x (Promotion immo), 42.xx (Génie civil), 43.99B (Structures métalliques)                  | **Hors-cible** : Très grands projets, cycles longs, besoins spécifiques |
+
+**Distribution complète des 41 codes APE analysés** :
+
+<details>
+<summary><b>📋 Voir la liste exhaustive des codes par score</b> (cliquer pour dérouler)</summary>
+
+### Score 25 points (3 codes) ⭐
+
+- **43.22B** : Travaux d'installation d'équipements thermiques et de climatisation
+- **43.29A** : Travaux d'isolation
+- **43.32A** : Travaux de menuiserie bois et PVC
+
+### Score 20 points (4 codes)
+
+- **41.20A** : Construction de maisons individuelles
+- **43.29B** : Autres travaux d'installation n.c.a.
+- **43.31Z** : Travaux de plâtrerie
+- **43.32B** : Travaux de menuiserie métallique et serrurerie
+
+### Score 10 points (20 codes)
+
+- **41.20B** : Construction d'autres bâtiments
+- **43.11Z** : Travaux de démolition
+- **43.12A** : Travaux de terrassement courants et travaux préparatoires
+- **43.12B** : Travaux de terrassement spécialisés ou de grande masse
+- **43.21A** : Travaux d'installation électrique dans tous locaux
+- **43.22A** : Travaux d'installation d'eau et de gaz en tous locaux
+- **43.32C** : Agencement de lieux de vente
+- **43.33Z** : Travaux de revêtement des sols et des murs
+- **43.34Z** : Travaux de peinture et vitrerie
+- **43.39Z** : Autres travaux de finition
+- **43.91A** : Travaux de charpente
+- **43.91B** : Travaux de couverture par éléments
+- **43.99A** : Travaux d'étanchéification
+- **43.99C** : Travaux de maçonnerie générale et gros œuvre de bâtiment
+- **43.99D** : Autres travaux spécialisés de construction
+- **81.30Z** : Services d'aménagement paysager
+
+### Score 0 points (14 codes) - Hors-cible
+
+- **41.10A** : Promotion immobilière de logements
+- **41.10B** : Promotion immobilière de bureaux
+- **41.10C** : Promotion immobilière d'autres bâtiments
+- **41.10D** : Supports juridiques de programmes
+- **42.11Z** : Construction de routes et autoroutes
+- **42.12Z** : Construction de voies ferrées
+- **42.13A** : Construction d'ouvrages d'art
+- **42.13B** : Construction et entretien de tunnels
+- **42.21Z** : Construction de réseaux pour fluides
+- **42.22Z** : Construction de réseaux électriques et télécommunications
+- **42.91Z** : Construction d'ouvrages maritimes et fluviaux
+- **42.99Z** : Construction d'autres ouvrages de génie civil
+- **43.13Z** : Forages et sondages
+- **43.21B** : Travaux d'installation électrique sur la voie publique
+- **43.99B** : Travaux de montage de structures métalliques
+- **74.90A** : Activité des économistes de la construction
+
+</details>
+
+**Rationale métier** :
+
+- **Score 25** : Métiers à forte valeur ajoutée avec besoins digitaux récurrents (devis, suivi chantiers, gestion sous-traitance)
+- **Score 20** : PME du bâtiment avec projets structurants nécessitant coordination
+- **Score 10** : Artisans/TPE avec besoins basiques (facturation, planning)
+- **Score 0** : Secteurs hors-périmètre (promotion immobilière = clients finals, génie civil = grands groupes)
 
 **4️⃣ Multi-Agences (0-20 pts)**
 
@@ -267,35 +335,64 @@ Le scoring seul ne suffit pas : la segmentation croise **score + critères méti
 
 ### 🏗️ Insights Sectoriels (Codes APE)
 
-**Distribution des 41 797 Cibles par Catégorie APE**
+**Distribution des 41 797 Cibles par Score APE**
 
-| Catégorie          | Codes APE | Volume Cibles | % Cibles | CA Potentiel Estimé |
-| ------------------ | --------- | ------------- | -------- | ------------------- |
-| **Haute valeur**   | 3 codes   | 8 250         | 19,7%    | ~45% du CA total    |
-| **Moyenne valeur** | 4 codes   | 16 820        | 40,2%    | ~38% du CA total    |
-| **Basse valeur**   | 16 codes  | 16 727        | 40,0%    | ~17% du CA total    |
+| Score APE | Codes APE | % des codes | Volume Cibles Estimé\* | Potentiel Commercial                |
+| --------- | --------- | ----------- | ---------------------- | ----------------------------------- |
+| **25** ⭐ | 3 codes   | 7,3%        | ~12 000                | Très élevé (récurrence)             |
+| **20**    | 4 codes   | 9,8%        | ~10 500                | Élevé (projets moyens)              |
+| **10**    | 20 codes  | 48,8%       | ~19 000                | Standard (TPE/artisans)             |
+| **0**     | 14 codes  | 34,1%       | ~300                   | Hors-cible (exclus scoring Premium) |
 
-**Top 3 APE Premium PME** :
+\*Volume estimé sur base 41 797 cibles exploitables
 
-1. 43.22 - Installation plomberie/chauffage : 102 Premium (23%)
-2. 41.20 - Construction bâtiments résidentiels : 87 Premium (20%)
-3. 43.21 - Installation électrique : 65 Premium (15%)
+**Top 7 APE Premium PME (438 établissements)** :
 
-**Insight stratégique** : 60% des Premium PME concentrés sur 3 codes APE → Possibilité spécialisation offre par vertical
+| Rang | Code APE | Métier                                  | Premium PME | % du segment | Score APE |
+| ---- | -------- | --------------------------------------- | ----------- | ------------ | --------- |
+| 🥇 1 | 43.22B   | Installation thermique et climatisation | 197         | 45,0%        | 25 ⭐     |
+| 🥈 2 | 43.32A   | Menuiserie bois et PVC                  | 62          | 14,2%        | 25 ⭐     |
+| 🥉 3 | 43.32B   | Menuiserie métallique et serrurerie     | 60          | 13,7%        | 20        |
+| 4    | 43.29B   | Autres travaux d'installation           | 37          | 8,4%         | 20        |
+| 5    | 43.29A   | Travaux d'isolation                     | 29          | 6,6%         | 25 ⭐     |
+| 6    | 41.20A   | Construction de maisons individuelles   | 28          | 6,4%         | 20        |
+| 7    | 43.31Z   | Travaux de plâtrerie                    | 25          | 5,7%         | 20        |
+
+**Insights clés** :
+
+✅ **45% des Premium PME concentrés sur un seul code APE** (43.22B - Chauffage/Climatisation)  
+→ Opportunité majeure de **spécialisation verticale** sur ce secteur
+
+✅ **Les 3 codes APE à score maximum (25 pts) représentent 65,8% du segment Premium**  
+→ La pondération APE à 25 points fonctionne efficacement pour cibler les PME à fort potentiel
+
+✅ **Top 7 codes = 100% du segment Premium PME**  
+→ Segmentation très concentrée, possibilité de créer des **offres sectorielles dédiées**
+
+✅ **Domination des métiers "techniques installateurs"** (chauffage, menuiserie, isolation)  
+→ PME nécessitant coordination multi-chantiers, gestion sous-traitance, suivi interventions
 
 ### 💡 Patterns Identifiés
 
-**1. Sweet Spot PME** : Établissements 10-19 salariés = 68% du segment Premium  
-→ Taille idéale entre artisan et ETI (agilité + capacité investissement)
+**🎯 1. Hyper-concentration sectorielle** : 45% des Premium PME sur un seul code APE (43.22B Chauffage/Climatisation)  
+→ Opportunité de **spécialisation verticale** : offre métier dédiée aux installateurs thermiques
 
-**2. Maturité juridique** : 94% des Premium PME = sociétés commerciales (SARL/SAS)  
-→ Entrepreneur Individuel quasi-absent du segment haute valeur
+**📏 2. Sweet Spot PME : 50-99 salariés** : 78,5% (344/438) du segment Premium  
+→ **Révision majeure** : Le sweet spot n'est pas 10-19 salariés mais **50-99 salariés** (PME structurées avec capacité d'investissement)  
+→ 17% supplémentaires (75) entre 100-199 salariés = **95,7% du segment entre 50-199 salariés**
 
-**3. Multi-sites comme proxy croissance** : Premium PME ont en moyenne 3,2 établissements  
-→ Indicateur expansion réussie (non-linéaire : >20 agences = bascule Grands Comptes)
+**⚖️ 3. Maturité juridique quasi-absolue** : 99,3% (435/438) = sociétés commerciales (SARL/SAS/SA)  
+→ Entrepreneur Individuel totalement absent du segment Premium PME  
+→ Forme juridique = **critère discriminant majeur** de maturité
 
-**4. Géographie vs. Score** : Départements ruraux sous-scorent de -15 points en moyenne  
-→ Biais urbain du scoring reflète réalité marché B2B (besoins digitaux + accessibles)
+**🏢 4. Profil multi-sites modéré** : Moyenne de **3,1 établissements** par entreprise Premium  
+→ Distribution : 42% mono-site, 22% bi-sites, 36% multi-sites (3+)  
+→ Multi-sites n'est **pas un critère absolu** : 184 Premium (42%) n'ont qu'un seul établissement
+
+**🗺️ 5. Surprise géographique : Domination rurale** : 37,7% (165/438) des Premium PME en zone rurale  
+→ **Contre-intuitif** : Les zones rurales/péri-urbaines représentent **66%** du segment (289/438)  
+→ Zones très urbaines = seulement 12,1% (53) du segment  
+→ **Insight clé** : PME BTP structurées prospèrent en zones rurales (moins de concurrence, bassins d'emploi stables, chantiers publics locaux)
 
 ---
 
@@ -504,7 +601,3 @@ Vos retours, suggestions d'amélioration ou questions techniques sont les bienve
 🔀 Pull Request → Toute contribution documentée sera reviewée avec plaisir
 
 ⭐ Si ce projet vous inspire ou vous aide dans votre apprentissage, n'hésitez pas à le star sur GitHub !
-
-```
-
-```
