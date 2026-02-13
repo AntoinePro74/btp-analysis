@@ -1,6 +1,6 @@
 # 🎯 Scoring de Potentiel BTP : Segmentation Intelligente de 1M d'Établissements
 
-> **Pipeline d'enrichissement multi-sources transformant 1,038M établissements BTP en 63.5K cibles qualifiées via scoring hybride 130 points (effectifs SIREN + score SIRET)**
+> **Pipeline d'enrichissement multi-sources transformant 984K entreprises BTP en 9 709 cibles ultra-qualifiées (0.99%) via segmentation entreprise 7 niveaux basée sur scoring hybride 130 points (score moyen SIREN)**
 
 [![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 [![BigQuery](https://img.shields.io/badge/BigQuery-Production-orange.svg)](https://cloud.google.com/bigquery)
@@ -15,7 +15,7 @@
 
 **Challenges identifiés** :
 
-❌ **Aiguille dans la botte de foin** : Comment identifier 40K cibles pertinentes parmi 1M établissements ?  
+❌ **Aiguille dans la botte de foin** : Comment identifier 10K cibles pertinentes parmi 984K entreprises ?  
 ❌ **Données fragmentées** : API SIRENE exhaustive mais non-exploitable brute (pas de scoring, pas de segmentation)  
 ❌ **Segmentation binaire inadaptée** : Logiques "TPE / PME / GE" trop grossières pour le BTP (besoin granularité)  
 ❌ **Gaspillage ressources** : Commerciaux perdant 70% du temps sur prospection non-qualifiée  
@@ -34,7 +34,7 @@
 
 ### Vue d'Ensemble du Pipeline
 
-**Objectif** : Créer une vue exploitable `v_etablissements_btp_global` dans BigQuery permettant segmentation opérationnelle des 1,038M établissements BTP français en 63.5K cibles actionnables (6.12% de la base).
+**Objectif** : Créer une vue exploitable `v_etablissements_btp_global` dans BigQuery permettant segmentation opérationnelle des 984K entreprises BTP françaises (1,038M établissements) en 9 709 cibles actives ultra-qualifiées (0.99% des entreprises) via 7 segments au niveau entreprise (SIREN).
 
 #### 📥 Collecte Multi-Sources
 
@@ -110,7 +110,7 @@ Validation : test_pipeline_quick.py (1 département test)
 
 ---
 
-## 📊 Méthodologie de Scoring (v1.5)
+## 📊 Méthodologie de Scoring (v1.6)
 
 ### Scoring Multi-Dimensionnel : 130 Points Maximum
 
@@ -254,138 +254,306 @@ Autres (SNC, SCI)            → 10 pts
 
 ---
 
-## 🎯 Segmentation Opérationnelle (5 Niveaux)
+## 🎯 Segmentation Entreprise (7 Segments)
 
-### Critères de Segmentation v1.5 (Hybride Exclusive)
+### Architecture v1.6 : Segmentation au Niveau SIREN
 
-Le scoring seul ne suffit pas : la segmentation croise **score SIRET** (granularité locale) + **effectifs SIREN** (décision d'achat) + **critères métiers** pour isoler **5 segments exclusifs** (0 chevauchement) :
+**Révolution v1.6** : Tous les établissements d'une même entreprise (SIREN) appartiennent au **même segment**. La segmentation repose sur :
+- **Score moyen SIREN** : Moyenne des scores de tous les établissements de l'entreprise
+- **Nombre d'établissements** : Potentiel de déploiement multi-sites
+- **Effectifs Unité Légale** : Proxy décision d'achat (DirCo/DirMarketing/Gérant)
+- **Code APE** : Secteur d'activité prioritaire
 
-| 🏆 Segment               | Volume     | % Base | Critères d'Entrée                                             | Score Moyen | Usage Business                                        |
-| ------------------------ | ---------- | ------ | ------------------------------------------------------------- | ----------- | ----------------------------------------------------- |
-| 🏢 **Grands Comptes**    | **4 141**  | 0,40%  | Score ≥78 + >20 agences + APE ≥10                             | **94.1**    | ABM, POC 3-6 mois, CSM dédié groupe                   |
-| 🏗️ **Moyennes Filiales** | **113**    | 0,01%  | Score ≥75 + 200-999 sal/établissement + ≤20 agences + APE ≥10 | **103.9**   | POC régionaux, approche groupe avec validation siège  |
-| 🥇 **Premium PME**       | **4 791**  | 0,46%  | Score ≥78 + 20-199 sal UL + APE ≥20 + ≤20 agences             | **98.2**    | Prospection Sales directe, démos 1:1, CSM dédié       |
-| ⭐ **Prioritaire**       | **8 034**  | 0,77%  | Score ≥70 + 10-199 sal UL + APE ≥20 + ≤50 agences             | **89.3**    | Marketing automation, webinaires, nurturing 6-12 mois |
-| ✓ **Secondaire**         | **46 478** | 4,48%  | Score ≥52 + 3+ sal/étab. + 6+ sal UL + ≤50 agences            | **82.3**    | Inbound, freemium, SEO, self-service                  |
-| ⚪ **Hors-cible**        | ~974 853   | 93,88% | Tous les autres                                               | **51.3**    | Non exploitable (micro, inactifs, scores faibles)     |
+**Cohérence garantie** : Un établissement = toujours le même segment que ses frères (même SIREN).
 
-**Total cibles exploitables** : **63 557** (6,12% de la base totale)
+### Pyramide des 7 Segments (Volumes Réels Validés)
 
-**🔥 Nouveautés v1.5 :**
+| 🏆 Segment                     | Entreprises | Établissements | Ratio | % Base | Score Moyen | Usage Business                                         |
+| ------------------------------ | ----------- | -------------- | ----- | ------ | ----------- | ------------------------------------------------------ |
+| 🏢 **1. Grands Comptes**       | **92**      | **5 170**      | 56.2  | 0.009% | ~94         | ABM, C-level, cycle 12-24 mois, contract value ×50+    |
+| 🏗️ **2. Groupes Structurés**   | **358**     | **3 351**      | 9.4   | 0.036% | ~85         | Contact siège, POC groupe, cycle 6-12 mois, CV ×9      |
+| 🚀 **3. Multi-Sites Qualifiés** | **601**     | **1 586**      | 2.6   | 0.061% | ~95         | POC 1 site → déploiement, cycle 3-6 mois, CV ×2-5      |
+| 🥇 **4. Premium Mono-Site**    | **974**     | **974**        | 1.0   | 0.099% | ~105        | Vente directe ciblée, closing rapide, cycle 2-4 mois   |
+| ⭐ **5. Prioritaire**          | **7 684**   | **10 587**     | 1.4   | 0.78%  | ~85         | Marketing automation, webinaires, nurturing 6-12 mois  |
+| ✓ **6. Secondaire**            | **308 563** | **335 792**    | 1.09  | 31.4%  | ~68         | Nurturing passif, inbound, SEO, self-service           |
+| ⚪ **7. Hors-Cible**           | **665 810** | **680 950**    | 1.02  | 67.7%  | ~49         | Exclus ciblage actif (micro, scores faibles)           |
 
-- **Segmentation hybride** : Score calculé au niveau SIRET (territorial + APE + multi-agences) + Effectifs au niveau SIREN (unité légale = entreprise totale)
-- **Segmentation en cascade** : Chaque établissement appartient à UN SEUL segment (0 chevauchement validé)
-- **Nouveau segment "Moyennes Filiales"** : Capture les filiales régionales 200-999 sal/établissement de groupes moyens (EIFFAGE, VINCI, BOUYGUES)
-- **Double critère effectifs Secondaire** : 3+ sal/établissement ET 6+ sal unité légale (exclusion micro-établissements isolés)
-- **Alignement décision d'achat** : Effectifs SIREN = proxy décision DirCo/DirMarketing/Gérant (niveau entreprise)
+**🎯 Total Cibles Actives (segments 1-5)** : **9 709 entreprises** (0.99%), **21 668 établissements** (potentiel contract value)
 
-#### 🎯 Insights par Segment
+**💡 Insight Ratio** : Premium Mono-Site à 1.0 parfait valide la cohérence de segmentation (mono-sites purs). Grands Comptes à 56.2 valide le critère >20 agences.
 
-**🏢 Grands Comptes (4 141 établissements)**
+---
 
-- **Volume** : ~90 entreprises mères contrôlant 4 141 établissements (moyenne 46 établissements/entreprise)
-- **Exemples identifiés** :
-  - ENGIE Home Services (212 établissements BTP)
-  - Proxiserve (104 établissements)
-  - Hervé Thermique (90 établissements)
-  - Axima Groupe (79 établissements)
-- **Score moyen** : 94.1 / 130
-- **Approche** : Account-Based Marketing, POC pilotes 3-6 mois, CSM dédié niveau groupe, contractualisations nationales
-- **Particularité v1.5** : Priorité absolue en cascade (exclus des autres segments)
+### 📊 Détails par Segment
 
-**🏗️ Moyennes Filiales (113 établissements) 🆕**
+#### 🏢 **1. GRANDS COMPTES** (92 entreprises, 5 170 établissements)
 
-- **Profil-type** : Filiales régionales de grands groupes BTP, 200-999 salariés PAR ÉTABLISSEMENT, ≤20 agences
-- **Exemples attendus** : EIFFAGE Energie (16 agences), VINCI Construction (13), CIEC (7), Bouygues Énergies & Services
-- **Score moyen** : **103.9 / 130** ⭐ (le plus élevé de tous les segments !)
-- **Opportunité** : POC régionaux avec autonomie limitée, validation siège requise
-- **Particularité** : Établissements de grande taille (200-999 sal) mais structure groupe moyenne (≤20 agences) = filiales régionales avec pouvoir décisionnel local
-- **Approche** : Approche mixte groupe (contact siège) + déploiement régional (pilote sur 1-3 filiales)
+**Critères d'entrée :**
+- `nb_etablissements > 20`
 
-**🥇 Premium PME (4 791 établissements)**
+**Profil-type :**
+- Grands groupes nationaux BTP (20 à 515 établissements)
+- Exemples identifiés : ENGIE (515), EDF (251), VINCI, BOUYGUES, EIFFAGE, Proxiserve (104)
+- Score moyen : ~94 / 130
 
-- **Profil-type** : PME régionale structurée, 20-199 salariés TOTAUX (unité légale), chauffagiste/isolation/menuiserie
-- **Score moyen** : 98.2 / 130
-- **Exemples secteurs** : Installation thermique (45% du segment estimé), Menuiserie spécialisée, Construction maisons
-- **Répartition géographique** :
-  - **Top 4 départements estimés** : 59-Nord (Lille), 92-Hauts-de-Seine (IDF), 69-Rhône (Lyon), 44-Loire-Atlantique (Nantes)
-  - Corrélation forte avec métropoles régionales + zones péri-urbaines
-- **CAC estimé** : 3x inférieur aux autres segments (taux conversion ~15%)
-- **Cycle de vente** : 3-4 mois (décisionnaire unique accessible)
-- **Charge commerciale** : 3-5 Sales à temps plein (1000 comptes/an/Sales)
-- **Particularité v1.5** :
-  - **+61% vs v1.4** grâce à l'utilisation des effectifs SIREN (capture PME multi-sites type Lorillard : 20 agences × 4 sal = 80 sal totaux)
-  - Cas d'usage : Établissement de 3-5 sal appartenant à entreprise de 50 sal totaux (5-10 agences) = **inclus dans Premium PME**
+**Stratégie commerciale :**
+- **Approche** : Account-Based Marketing (ABM), contact C-level (DirGén, DirOps)
+- **Cycle de vente** : 12-24 mois
+- **Contract value** : ×50 à ×500 (déploiement national)
+- **Ressources** : CSM dédié groupe, POC pilotes 3-6 mois, contractualisation nationale
 
-**⭐ Prioritaire (8 034 établissements)**
+**Particularités :**
+- Ratio 56.2 établissements/entreprise = validation critère >20 agences
+- Priorité absolue dans la cascade de segmentation
+- Volume réduit (92) = approche ultra-personnalisée possible
 
-- **Profil-type** : Petites PME 10-19 salariés + PME moyennes 20-199 salariés (métiers prioritaires APE ≥20, score <78)
-- **Score moyen** : 89.3 / 130
-- **Opportunité** : Nurturing long terme (6-12 mois) via contenus éducatifs, webinaires sectoriels
-- **Conversion** : 5-8% après 3 points de contact qualifiés
-- **Charge commerciale** : 2-3 Marketing automation spécialistes
-- **Particularité v1.5** :
-  - **+32% vs v1.4**
-  - Intègre les PME 10-199 sal UL avec score 70-77 (exclus du Premium mais forte maturité)
-  - Effectifs SIREN = décision au niveau entreprise (même si établissement individuel petit)
+---
 
-**✓ Secondaire (46 478 établissements)**
+#### 🏗️ **2. GROUPES STRUCTURÉS** (358 entreprises, 3 351 établissements)
 
-- **Profil-type** : Établissements structurés (3+ sal/établissement) de micro-PME (6+ sal unité légale) + PME score moyen (52-69)
-- **Score moyen** : **82.3 / 130** ⭐ (proche de Prioritaire !)
-- **Stratégie** : Freemium, essais gratuits, self-service, inbound marketing, contenus SEO
-- **Conversion** : 2-4% via nurturing passif (newsletter, blog, webinaires en replay)
-- **Charge commerciale** : 1-2 Marketing contenus (SEO, inbound)
-- **Particularité v1.5** :
-  - **Double critère effectifs** : 3+ sal/établissement ET 6+ sal unité légale
-  - **Réduction -85% vs v1.4** (306K → 46K) grâce au filtre établissements structurés
-  - **Score moyen exceptionnel (82.3)** : Le double critère a transformé Secondaire en segment de haute qualité
-  - Volume 46K = Parfait pour ROI inbound/SEO (assez large pour trafic, assez qualifié pour conversion)
-- **Insight clé** : Ce n'est plus un segment "secondaire" par la qualité, mais par l'approche commerciale (self-service vs outbound)
+**Critères d'entrée :**
+- `nb_etablissements BETWEEN 6 AND 20`
+- `score_moyen_siren >= 75`
+- `effectifs_unite_legale >= 20` (≥20 salariés totaux)
+
+**Profil-type :**
+- Groupes régionaux structurés (6-20 établissements, 100-999 salariés)
+- Divisions régionales grands groupes (ex: EIFFAGE Energie régions)
+- Exemples : CIEC (7 agences), BALAS (20), filiales régionales VINCI/BOUYGUES
+- Score moyen : ~85 / 130
+
+**Stratégie commerciale :**
+- **Approche** : Contact siège ou direction régionale
+- **Cycle de vente** : 6-12 mois
+- **POC** : 1-2 sites pilotes → Déploiement groupe
+- **Contract value** : ×6 à ×20
+
+**Particularités :**
+- Ratio 9.4 établissements/entreprise = validation critère 6-20 agences
+- Potentiel déploiement groupe avec autonomie décisionnelle modérée
+- Volume 358 = approche semi-personnalisée (ABM allégé)
+
+---
+
+#### 🚀 **3. MULTI-SITES QUALIFIÉS** (601 entreprises, 1 586 établissements)
+
+**Critères d'entrée :**
+- `nb_etablissements BETWEEN 2 AND 5`
+- `score_moyen_siren >= 90`
+- `effectifs_unite_legale BETWEEN 20 AND 199` (20-199 salariés totaux)
+- `code_ape_score >= 20` (APE haute ou moyenne priorité)
+
+**Profil-type :**
+- PME en croissance (2-5 agences, 50-199 salariés)
+- Secteurs porteurs : Chauffage/Clim, Isolation, Menuiserie, Plomberie
+- Score moyen : ~95 / 130 (parmi les plus élevés !)
+
+**Stratégie commerciale :**
+- **Approche** : Contact DirGén ou DirOps
+- **Cycle de vente** : 3-6 mois
+- **POC** : 1 site → Déploiement 2-5 sites
+- **Contract value** : ×2 à ×5
+
+**Particularités :**
+- Ratio 2.6 établissements/entreprise = majorité bi-sites (2) et tri-sites (3)
+- **Différence vs Premium Mono-Site** : Potentiel déploiement multi-sites
+- **Différence vs Prioritaire** : Score très élevé (≥90) = forte maturité
+- Volume 601 = approche ciblée avec sales dédiés
+
+---
+
+#### 🥇 **4. PREMIUM MONO-SITE** (974 entreprises, 974 établissements)
+
+**Critères d'entrée :**
+- `nb_etablissements = 1` (mono-site uniquement)
+- `score_total >= 100` (score établissement, pas score moyen)
+- `effectifs_unite_legale BETWEEN 20 AND 199`
+- `code_ape_score >= 20`
+
+**Profil-type :**
+- PME structurées mono-site (50-199 salariés)
+- Forte maturité commerciale (score ≥100)
+- Secteurs prioritaires : Chauffage, Isolation, Menuiserie
+- Score moyen : ~105 / 130 ⭐ (le plus élevé de tous les segments !)
+
+**Stratégie commerciale :**
+- **Approche** : Vente directe ciblée, contact DirGén ou Responsable Ops
+- **Cycle de vente** : 2-4 mois (le plus court !)
+- **Contract value** : ×1 (mono-site, pas de déploiement)
+- **Closing** : Rapide (décisionnaire unique, forte maturité)
+
+**Particularités :**
+- **Ratio 1.0 parfait** : Validation totale du critère mono-site ✅
+- **Différence vs Multi-Sites Qualifiés** : Pas de potentiel déploiement, mais closing plus rapide
+- **Maturité maximale** : Score ≥100 = PME avec fort besoin digitalisation
+- Volume 974 = approche ciblée avec taux conversion élevé attendu
+
+---
+
+#### ⭐ **5. PRIORITAIRE** (7 684 entreprises, 10 587 établissements)
+
+**Critères d'entrée :**
+- `nb_etablissements <= 5`
+- `score_moyen_siren >= 78`
+- `code_ape_score >= 20`
+- `effectifs_unite_legale >= 10` (≥10 salariés totaux)
+  OU `nb_etablissements >= 2 AND effectifs_UL >= 6` (multi-sites avec 6-9 sal)
+
+**Profil-type :**
+- PME et multi-sites moyens (10-200 salariés)
+- APE prioritaires (Chauffage, Isolation, Menuiserie, Plomberie, Plâtrerie)
+- Mono ou multi-sites (≤5 établissements)
+- Score moyen : ~85 / 130
+
+**Stratégie commerciale :**
+- **Approche** : Marketing automation + inbound marketing
+- **Cycle de vente** : 2-6 mois
+- **Tactiques** : Webinaires sectoriels, contenus ciblés, nurturing 6-12 mois
+- **Sales** : Contact si signaux d'intérêt qualifiés (3+ interactions)
+
+**Particularités :**
+- Ratio 1.4 établissements/entreprise = majorité mono-sites + quelques bi-sites
+- **Cœur de cible masse** : 7 684 entreprises = volume idéal pour marketing automation
+- **Différence vs Premium** : Score 78-89 (vs ≥90+) = maturité légèrement inférieure
+- Volume important = nécessite automatisation (pas de contact manuel systématique)
+
+---
+
+#### ✓ **6. SECONDAIRE** (308 563 entreprises, 335 792 établissements)
+
+**Critères d'entrée :**
+- `score_moyen_siren >= 60`
+- Exclus des 5 segments supérieurs
+
+**Profil-type :**
+- TPE/PME 3-50 salariés
+- Scores moyens (60-77)
+- Tous secteurs BTP
+- Score moyen : ~68 / 130
+
+**Stratégie commerciale :**
+- **Approche** : Nurturing long terme, inbound uniquement
+- **Tactiques** : Contenus éducatifs (blog, guides), SEO, newsletter
+- **Conversion** : Pas de prospection active (coût > ROI attendu)
+- **Cycle** : Si inbound spontané uniquement
+
+**Particularités :**
+- Ratio 1.09 établissements/entreprise = quasi exclusivement mono-sites
+- **Réservoir de croissance** : 308K entreprises pour scaling futur
+- **Pas "secondaire" en qualité** : Score moyen 68 = bon fit, mais approche passive
+- Volume important = nécessite stratégie inbound scalable (SEO, contenu)
+
+---
+
+#### ⚪ **7. HORS-CIBLE** (665 810 entreprises, 680 950 établissements)
+
+**Critères d'entrée :**
+- `score_moyen_siren < 60`
+
+**Profil-type :**
+- Micro-entreprises (1-5 salariés)
+- Secteurs hors cible (APE score faible)
+- Zones rurales isolées
+- Entrepreneurs individuels
+- Score moyen : ~49 / 130
+
+**Stratégie commerciale :**
+- **Approche** : Exclus du ciblage marketing/commercial actif
+- **Autorisation** : Peuvent acheter via site web (self-service uniquement)
+- **Coût** : Toute action marketing = ROI négatif attendu
+
+**Particularités :**
+- 67.7% de la base BTP = validation qualité segmentation (exclusion massive cohérente)
+- Ratio 1.02 = quasi exclusivement mono-sites
+- Score <60 = micro-entreprises, artisans isolés, faible capacité investissement
 
 ---
 
 ## 📈 Résultats & Insights Analytiques
 
-### KPIs du Pipeline
+### KPIs du Pipeline v1.6
 
-✅ **1 038 410 établissements BTP** traités (exhaustivité INSEE)  
-✅ **63 557 cibles exploitables** identifiées (6,12% de la base) - **5 segments exclusifs**  
-✅ **99,6% de taux de couverture** après validation (4 167 établissements exclus pour données incohérentes)  
+✅ **984 082 entreprises (SIREN)** analysées (exhaustivité INSEE)  
+✅ **1 038 410 établissements (SIRET)** traités avec scoring individuel  
+✅ **9 709 cibles actives** ultra-qualifiées (0.99% de la base) - **7 segments exclusifs niveau SIREN**  
+✅ **21 668 établissements** dans cibles actives (potentiel contract value)  
+✅ **99,6% de taux de couverture** après validation  
 ✅ **23 codes APE BTP** analysés (3 haute + 4 moyenne + 16 basse valeur)  
 ✅ **Score moyen global** : 53,4 / 130 (médiane à 50)  
-✅ **0 chevauchement** entre segments (segmentation en cascade validée)  
-✅ **Score moyen segments exploitables** : 88.5 / 130 (vs 51.3 hors-cible)
+✅ **Cohérence SIREN parfaite** : 100% des établissements d'un même SIREN dans le même segment ✅  
+✅ **Ratio Premium Mono-Site : 1.0** (validation mono-sites purs) ✅  
+✅ **Score moyen cibles actives** : ~90 / 130 (vs ~68 Secondaire, ~49 Hors-Cible)
 
-### 📈 Évolution de la Segmentation v1.3 → v1.5
 
-| Métrique                     | v1.3 (Jan 2026) | v1.4 (Fév 2026) | v1.5 (Fév 2026) | Évolution      |
-| ---------------------------- | --------------- | --------------- | --------------- | -------------- |
-| **Premium PME**              | 438             | 2 975           | **4 791**       | **+994%** 🚀   |
-| **Prioritaire**              | ~6 000          | 6 080           | **8 034**       | **+34%** ⬆️    |
-| **Secondaire**               | ~55 000         | 46 153          | **46 478**      | **-15%** ⬇️    |
-| **Grands Comptes**           | ~4 100          | 3 626           | **4 141**       | **+1%** ↗️     |
-| **Moyennes Filiales**        | -               | -               | **113** 🆕      | **Nouveau**    |
-| **TOTAL EXPLOITABLE**        | ~65 500         | ~58 834         | **63 557**      | **-3%**        |
-| **% Base Exploitable**       | ~6,3%           | ~5,7%           | **6,12%**       | **Optimal** ✅ |
-| **Score Moyen Exploitables** | ~85             | ~87             | **88.5**        | **+4%** ⬆️     |
-| **Chevauchements**           | Non mesuré      | **3 165** 🚨    | **0** ✅        | **-100%**      |
+### 📈 Évolution de la Segmentation v1.5 → v1.6
 
-**🔑 Changements Clés v1.5 :**
+**Révolution architecturale** : Passage de 5 à 7 segments avec segmentation niveau **entreprise (SIREN)** au lieu d'établissement (SIRET).
 
-1. **Segmentation hybride** : Score SIRET (granularité locale) + Effectifs SIREN (décision entreprise)
-   - **Impact** : Capture des PME multi-sites (ex: Lorillard, 20 agences × 4 sal = 80 sal totaux → Premium PME)
+| Métrique                         | v1.5 (Fév 2026) | v1.6 (Fév 2026) | Évolution       | Impact                                   |
+| -------------------------------- | --------------- | --------------- | --------------- | ---------------------------------------- |
+| **Nombre de segments**           | 5               | **7**           | **+40%**        | Différenciation mono-sites               |
+| **Cibles actives (entreprises)** | ~17 000         | **9 709**       | **-43%** 🎯     | Focus qualité maximale (top 1%)          |
+| **Cibles actives (établ.)**      | ~63 500         | **21 668**      | **-66%** 🎯     | Élimination doublons multi-sites         |
+| **Grands Comptes**               | 4 141 établ.    | 92 SIREN        | **Refonte**     | Comptage entreprises (vs établissements) |
+| **Premium Mono-Site**            | 0               | **974** 🆕      | **Nouveau**     | Différenciation mono-sites qualifiés     |
+| **Multi-Sites Qualifiés**        | 0               | **601** 🆕      | **Nouveau**     | Séparation 2-5 agences premium           |
+| **Groupes Structurés**           | 0               | **358** 🆕      | **Nouveau**     | Groupes 6-20 agences isolés              |
+| **Prioritaire**                  | 8 034 établ.    | 7 684 SIREN     | **-4%**         | Stabilité                                |
+| **Secondaire**                   | 46 478 établ.   | 308 563 SIREN   | **+564%** 📈    | Capture mono-sites score moyen           |
+| **Chevauchements SIREN**         | Non mesuré v1.5 | **0** ✅        | **Éliminé**     | Cohérence parfaite                       |
+| **Ratio Mono-Site Premium**      | N/A             | **1.0** ✅      | **Validation**  | Mono-sites purs confirmés                |
+| **Score moyen Cibles Actives**   | ~88.5           | **~90**         | **+1.7%** ⬆️    | Sélectivité accrue                       |
 
-2. **Segmentation en cascade exclusive** : Chaque établissement = 1 seul segment
-   - **Impact** : Élimination totale des chevauchements (3 165 → 0)
+#### 🔑 Changements Clés v1.6
 
-3. **Nouveau segment "Moyennes Filiales"** : Filiales régionales 200-999 sal/établissement
-   - **Impact** : Séparation EIFFAGE/VINCI/BOUYGUES filiales vs PME indépendantes
+**1️⃣ Segmentation Niveau SIREN (Entreprise)**
+- **v1.5** : Chaque établissement (SIRET) segmenté individuellement → Risque incohérence multi-sites
+- **v1.6** : `score_moyen_siren` (AVG scores établissements) → **Tous établissements d'une entreprise = même segment**
+- **Impact** : Cohérence décisionnelle parfaite (décision = niveau DirCo/Gérant, pas niveau établissement)
 
-4. **Double critère effectifs Secondaire** : 3+ sal/établissement ET 6+ sal unité légale
-   - **Impact** : Réduction -85% du volume (306K → 46K) mais score moyen +28% (64 → 82.3)
+**2️⃣ Différenciation Mono-Sites (3 nouveaux segments)**
+- **v1.5** : Mono-sites noyés dans Premium PME + Prioritaire + Secondaire
+- **v1.6** : 
+  - **Premium Mono-Site** (974) : Score ≥100, 20-199 sal, mono-site pur
+  - **Groupes Structurés** (358) : 6-20 agences, score ≥75
+  - **Multi-Sites Qualifiés** (601) : 2-5 agences, score ≥90
+- **Impact** : Stratégies commerciales adaptées (closing rapide mono vs déploiement multi)
+
+**3️⃣ Élimination Doublons Multi-Sites**
+- **v1.5** : Lorillard (20 agences) = 20 lignes dans Premium PME → Surévaluation volume
+- **v1.6** : Lorillard (20 agences) = 1 ligne "Multi-Sites Qualifiés" → Comptage entreprises réel
+- **Impact** : Passage de 63 557 établissements cibles à **9 709 entreprises** (volume actionnable réaliste)
+
+**4️⃣ Redéfinition Secondaire**
+- **v1.5** : 46 478 établissements (score ≥52, effectifs établissement + SIREN)
+- **v1.6** : 308 563 entreprises (score moyen SIREN ≥60)
+- **Impact** : Capture massive mono-sites score moyen (60-77) = réservoir inbound/nurturing
+
+**5️⃣ Qualité vs Quantité**
+- **v1.5** : 17K entreprises cibles (1.7% base) = Risque dilution qualité
+- **v1.6** : **9 709 entreprises cibles (0.99% base) = Top 1% ultra-qualifié** 🎯
+- **Impact** : Focus maximal, ROI commercial optimisé, segments actionnables
+
+---
+
+#### 💡 Rationale Stratégique v1.6
+
+**Pourquoi réduire de 63K à 21K établissements ?**
+
+1. **Élimination doublons** : Lorillard = 1 entreprise (pas 20), ENGIE = 1 entreprise (pas 515)
+2. **Cohérence commerciale** : On vend à une ENTREPRISE, pas à 20 établissements séparément
+3. **Actionnable** : 9 709 entreprises = gérable par Sales/Marketing (vs 63K = irréaliste)
+4. **Qualité maximale** : Top 1% (vs top 6%) = ROI commercial optimal
+
+**Pourquoi 7 segments au lieu de 5 ?**
+
+1. **Différenciation mono-sites** : Premium Mono (closing rapide) ≠ Multi-Sites (déploiement groupe)
+2. **Stratégies distinctes** : Groupes 6-20 agences (approche siège) ≠ Multi-Sites 2-5 (PME croissance)
+3. **Granularité opérationnelle** : Chaque segment = playbook commercial spécifique
+4. **Scalabilité** : 308K Secondaire = réservoir pour croissance future (nurturing passif)
 
 ### 🗺️ Insights Territoriaux
+> **Note v1.6** : Les données territoriales ci-dessous sont basées sur la v1.3 (438 Premium PME). Une mise à jour avec les 974 Premium Mono-Site + 601 Multi-Sites Qualifiés sera effectuée prochainement. Les tendances (concentration métropoles, domination zones urbaines) restent valables.
 
 **Top 5 Départements - Premium PME (~3 000 cibles)**
 
@@ -404,7 +572,7 @@ Le scoring seul ne suffit pas : la segmentation croise **score SIRET** (granular
 **Corrélation Score × Urbanisation** : 0,58 (modérée-forte)  
 → Zones très urbaines sur-représentées dans segments Premium/Prioritaire
 
-### 🏗️ Insights Sectoriels (Codes APE)
+### 🏗️ Insights Sectoriels (Codes APE) [EN COURS DE MISE A JOUR]
 
 **Distribution des 41 797 Cibles par Score APE**
 
