@@ -270,13 +270,13 @@ Autres (SNC, SCI)            → 10 pts
 
 | 🏆 Segment                     | Entreprises | Établissements | Ratio | % Base | Score Moyen | Usage Business                                         |
 | ------------------------------ | ----------- | -------------- | ----- | ------ | ----------- | ------------------------------------------------------ |
-| 🏢 **1. Grands Comptes**       | **92**      | **5 170**      | 56.2  | 0.009% | ~94         | ABM, C-level, cycle 12-24 mois, contract value ×50+    |
-| 🏗️ **2. Groupes Structurés**   | **358**     | **3 351**      | 9.4   | 0.036% | ~85         | Contact siège, POC groupe, cycle 6-12 mois, CV ×9      |
-| 🚀 **3. Multi-Sites Qualifiés** | **601**     | **1 586**      | 2.6   | 0.061% | ~95         | POC 1 site → déploiement, cycle 3-6 mois, CV ×2-5      |
-| 🥇 **4. Premium Mono-Site**    | **974**     | **974**        | 1.0   | 0.099% | ~105        | Vente directe ciblée, closing rapide, cycle 2-4 mois   |
-| ⭐ **5. Prioritaire**          | **7 684**   | **10 587**     | 1.4   | 0.78%  | ~85         | Marketing automation, webinaires, nurturing 6-12 mois  |
+| 🏢 **1. Grands Comptes**       | **92**      | **5 170**      | 56.2  | 0.009% | ~89         | ABM, C-level, cycle 12-24 mois, contract value ×50+    |
+| 🏗️ **2. Groupes Structurés**   | **358**     | **3 351**      | 9.36  | 0.036% | ~91         | Contact siège, POC groupe, cycle 6-12 mois, CV ×9      |
+| 🚀 **3. Multi-Sites Qualifiés** | **601**     | **1 586**     | 2.64  | 0.061% | ~97         | POC 1 site → déploiement, cycle 3-6 mois, CV ×2-5      |
+| 🥇 **4. Premium Mono-Site**    | **974**     | **974**        | 1.0   | 0.099% | ~103        | Vente directe ciblée, closing rapide, cycle 2-4 mois   |
+| ⭐ **5. Prioritaire**          | **7 684**   | **10 587**     | 1.38  | 0.78%  | ~90         | Marketing automation, webinaires, nurturing 6-12 mois  |
 | ✓ **6. Secondaire**            | **308 563** | **335 792**    | 1.09  | 31.4%  | ~68         | Nurturing passif, inbound, SEO, self-service           |
-| ⚪ **7. Hors-Cible**           | **665 810** | **680 950**    | 1.02  | 67.7%  | ~49         | Exclus ciblage actif (micro, scores faibles)           |
+| ⚪ **7. Hors-Cible**           | **665 810** | **680 950**    | 1.02  | 67.7%  | ~45         | Exclus ciblage actif (micro, scores faibles)           |
 
 **🎯 Total Cibles Actives (segments 1-5)** : **9 709 entreprises** (0.99%), **21 668 établissements** (potentiel contract value)
 
@@ -290,11 +290,12 @@ Autres (SNC, SCI)            → 10 pts
 
 **Critères d'entrée :**
 - `nb_etablissements > 20`
+- (aucun filtre effectifs/score = priorité absolue volume)
 
 **Profil-type :**
 - Grands groupes nationaux BTP (20 à 515 établissements)
-- Exemples identifiés : ENGIE (515), EDF (251), VINCI, BOUYGUES, EIFFAGE, Proxiserve (104)
-- Score moyen : ~94 / 130
+- Exemples identifiés : ENGIE HOME SERVICES (212), HUIS CLOS (149), Proxiserve (104), AXIMA CONCEPT (79), IZI CONFORT (72)
+- Score moyen : ~89 / 130
 
 **Stratégie commerciale :**
 - **Approche** : Account-Based Marketing (ABM), contact C-level (DirGén, DirOps)
@@ -306,6 +307,7 @@ Autres (SNC, SCI)            → 10 pts
 - Ratio 56.2 établissements/entreprise = validation critère >20 agences
 - Priorité absolue dans la cascade de segmentation
 - Volume réduit (92) = approche ultra-personnalisée possible
+- Score moyen inférieur (89 vs 91-103 autres segments) = effet de dilution lié au grand nombre d'établissements
 
 ---
 
@@ -319,8 +321,8 @@ Autres (SNC, SCI)            → 10 pts
 **Profil-type :**
 - Groupes régionaux structurés (6-20 établissements, 100-999 salariés)
 - Divisions régionales grands groupes (ex: EIFFAGE Energie régions)
-- Exemples : CIEC (7 agences), BALAS (20), filiales régionales VINCI/BOUYGUES
-- Score moyen : ~85 / 130
+- Exemples : ETABLISSEMENT LORILLARD (20), MUST (20), RIDORET MENUISERIE (17), ATOUT HABITAT (7)
+- Score moyen : ~91 / 130
 
 **Stratégie commerciale :**
 - **Approche** : Contact siège ou direction régionale
@@ -332,6 +334,7 @@ Autres (SNC, SCI)            → 10 pts
 - Ratio 9.4 établissements/entreprise = validation critère 6-20 agences
 - Potentiel déploiement groupe avec autonomie décisionnelle modérée
 - Volume 358 = approche semi-personnalisée (ABM allégé)
+- Score supérieur à Prioritaire (91 vs 90) : Validation effet structuration (6-20 établissements + seuil score_moyen ≥75 sélectionne maturité élevée)
 
 ---
 
@@ -346,7 +349,7 @@ Autres (SNC, SCI)            → 10 pts
 **Profil-type :**
 - PME en croissance (2-5 agences, 50-199 salariés)
 - Secteurs porteurs : Chauffage/Clim, Isolation, Menuiserie, Plomberie
-- Score moyen : ~95 / 130 (parmi les plus élevés !)
+- Score moyen : ~97 / 130 (2ème plus élevé !)
 
 **Stratégie commerciale :**
 - **Approche** : Contact DirGén ou DirOps
@@ -366,7 +369,7 @@ Autres (SNC, SCI)            → 10 pts
 
 **Critères d'entrée :**
 - `nb_etablissements = 1` (mono-site uniquement)
-- `score_total >= 100` (score établissement, pas score moyen)
+- `score_total >= 100` (score total établissement = score moyen siren car 1 seul établissement)
 - `effectifs_unite_legale BETWEEN 20 AND 199`
 - `code_ape_score >= 20`
 
@@ -374,7 +377,7 @@ Autres (SNC, SCI)            → 10 pts
 - PME structurées mono-site (50-199 salariés)
 - Forte maturité commerciale (score ≥100)
 - Secteurs prioritaires : Chauffage, Isolation, Menuiserie
-- Score moyen : ~105 / 130 ⭐ (le plus élevé de tous les segments !)
+- Score moyen : ~103 / 130 ⭐ (le plus élevé de tous les segments !)
 
 **Stratégie commerciale :**
 - **Approche** : Vente directe ciblée, contact DirGén ou Responsable Ops
@@ -403,7 +406,7 @@ Autres (SNC, SCI)            → 10 pts
 - PME et multi-sites moyens (10-200 salariés)
 - APE prioritaires (Chauffage, Isolation, Menuiserie, Plomberie, Plâtrerie)
 - Mono ou multi-sites (≤5 établissements)
-- Score moyen : ~85 / 130
+- Score moyen : ~90 / 130
 
 **Stratégie commerciale :**
 - **Approche** : Marketing automation + inbound marketing
@@ -414,7 +417,7 @@ Autres (SNC, SCI)            → 10 pts
 **Particularités :**
 - Ratio 1.4 établissements/entreprise = majorité mono-sites + quelques bi-sites
 - **Cœur de cible masse** : 7 684 entreprises = volume idéal pour marketing automation
-- **Différence vs Premium** : Score 78-89 (vs ≥90+) = maturité légèrement inférieure
+- **Différence vs Premium** : Score 90 (vs ≥103) = maturité inférieure
 - Volume important = nécessite automatisation (pas de contact manuel systématique)
 
 ---
@@ -455,7 +458,7 @@ Autres (SNC, SCI)            → 10 pts
 - Secteurs hors cible (APE score faible)
 - Zones rurales isolées
 - Entrepreneurs individuels
-- Score moyen : ~49 / 130
+- Score moyen : ~45 / 130
 
 **Stratégie commerciale :**
 - **Approche** : Exclus du ciblage marketing/commercial actif
